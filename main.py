@@ -42,7 +42,12 @@ class WindowSelector(QWidget):
         # Создание кнопки "Назад"
         self.back_button = QPushButton('Назад')
         self.back_button.clicked.connect(self.showSelectionScreen)
-        main_layout.addWidget(self.back_button)
+        self.back_button.hide()  # Скрываем кнопку "Назад" при запуске программы
+
+        # Создаем контейнер для кнопки "Назад" и добавляем в главный макет
+        back_layout = QHBoxLayout()
+        back_layout.addWidget(self.back_button)
+        main_layout.addLayout(back_layout)
 
         self.setStyleSheet("""
             QPushButton {
@@ -88,10 +93,10 @@ class WindowSelector(QWidget):
         self.input_screen = QWidget()
         self.input_layout = QVBoxLayout(self.input_screen)
 
-        self.height_label = QLabel('Высота (см):')
+        self.height_label = QLabel('Высота (м):')  # Изменено на метры
         self.height_lineedit = QLineEdit()
 
-        self.width_label = QLabel('Ширина (см):')
+        self.width_label = QLabel('Ширина (м):')  # Изменено на метры
         self.width_lineedit = QLineEdit()
 
         self.spacer_size_label = QLabel('Размер шпатика (см):')
@@ -123,8 +128,13 @@ class WindowSelector(QWidget):
         self.stacked_widget.addWidget(self.input_screen)
         self.stacked_widget.setCurrentWidget(self.input_screen)
 
+        # Показываем кнопку "Назад" при открытии экрана с полями ввода
+        self.back_button.show()
+
     def showSelectionScreen(self):
         self.stacked_widget.setCurrentWidget(self.selection_screen)
+        # Скрываем кнопку "Назад" при возврате к экрану выбора
+        self.back_button.hide()
 
     def calculateCost(self):
         height = float(self.height_lineedit.text())
@@ -133,33 +143,41 @@ class WindowSelector(QWidget):
 
         glass_package = self.glass_package_combobox.currentText()
 
-        frame_cost = 182 * (2 * (height + width) / 100)  # 2 стороны
-        mullion_cost = 216 * (2 * (height + width) / 100)  # 2 стороны
-        sash_cost = 208 * (height / 100)  # 1 сторона
+        frame_cost = 182 * (2 * (height + width))  # В метрах, без деления на 100
+        mullion_cost = 216 * (2 * (height + width))  # В метрах, без деления на 100
+        sash_cost = 208 * height  # В метрах, без деления на 100
 
         if glass_package == 'Однокамерный':
             glass_cost = 100
         else:
             glass_cost = 150
 
-        total_cost = frame_cost + mullion_cost + sash_cost + glass_cost
+        # Расчет количества стеклопакетов
+        glass_width = 0.5  # Ширина стеклопакета в метрах
+        glass_height = 0.5  # Высота стеклопакета в метрах
 
-        self.showCostTable(frame_cost, mullion_cost, sash_cost, glass_cost, total_cost)
+        glass_area = width * height  # Площадь окна в квадратных метрах
+        glass_area_per_glass = glass_width * glass_height  # Площадь одного стеклопакета в квадратных метрах
+        glass_count = glass_area / glass_area_per_glass  # Количество стеклопакетов
 
-    def showCostTable(self, frame_cost, mullion_cost, sash_cost, glass_cost, total_cost):
+        total_cost = frame_cost + mullion_cost + sash_cost + (glass_cost * glass_count)
+
+        self.showCostTable(frame_cost, mullion_cost, sash_cost, glass_cost, glass_count, total_cost)
+
+    def showCostTable(self, frame_cost, mullion_cost, sash_cost, glass_cost, glass_count, total_cost):
         # Создание таблицы для отображения результата расчета
         self.result_table = QTableWidget()
-        self.result_table.setRowCount(5)
+        self.result_table.setRowCount(6)
         self.result_table.setColumnCount(5)
 
         headers = ['N', 'Товар', 'Кол-во', 'Единица', 'Сумма']
         self.result_table.setHorizontalHeaderLabels(headers)
 
         items = [
-            ('1', 'Рама', f'{2 * ((float(self.height_lineedit.text()) + float(self.width_lineedit.text())) / 100)}', 'м', f'{frame_cost} руб.'),
-            ('2', 'Импост', f'{2 * ((float(self.height_lineedit.text()) + float(self.width_lineedit.text())) / 100)}', 'м', f'{mullion_cost} руб.'),
-            ('3', 'Створка', f'{float(self.height_lineedit.text()) / 100}', 'м', f'{sash_cost} руб.'),
-            ('4', 'Стеклопакет', '1', 'шт', f'{glass_cost} руб.'),
+            ('1', 'Рама', f'{2 * (float(self.height_lineedit.text()) + float(self.width_lineedit.text()))}', 'м', f'{frame_cost} руб.'),
+            ('2', 'Импост', f'{2 * (float(self.height_lineedit.text()) + float(self.width_lineedit.text()))}', 'м', f'{mullion_cost} руб.'),
+            ('3', 'Створка', f'{float(self.height_lineedit.text())}', 'м', f'{sash_cost} руб.'),
+            ('4', 'Стеклопакет', f'{glass_count}', 'шт', f'{glass_cost} руб.'),
             ('', '', '', 'Итого:', f'{total_cost} руб.')
         ]
 
@@ -178,6 +196,12 @@ class WindowSelector(QWidget):
         # Добавляем таблицу на стек виджет
         self.stacked_widget.addWidget(self.result_table)
         self.stacked_widget.setCurrentWidget(self.result_table)
+
+    def clearInputFields(self):
+        # Очищаем данные в полях ввода
+        self.height_lineedit.clear()
+        self.width_lineedit.clear()
+        self.spacer_size_lineedit.clear()
 
 
 if __name__ == '__main__':
