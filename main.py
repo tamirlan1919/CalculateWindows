@@ -8,6 +8,7 @@ class WindowSelector(QWidget):
         super().__init__()
         self.initUI()
         self.loadPrices()
+        self.window_type = None  # Инициализация атрибута для хранения типа окна
 
     def initUI(self):
         self.setWindowTitle('Калькулятор окон')
@@ -27,7 +28,7 @@ class WindowSelector(QWidget):
         self.double_button.clicked.connect(self.doors)
 
         self.st = QPushButton("Расчет стеклопакета")
-        self.st.clicked.connect(self.doors)
+        self.st.clicked.connect(self.priceSt)
 
         self.selection_layout.addWidget(self.single_button)
         self.selection_layout.addWidget(self.double_button)
@@ -76,8 +77,81 @@ class WindowSelector(QWidget):
         self.show()
 
     def doors(self):
-        pass
+        selection_screen = QWidget()
+        selection_layout = QVBoxLayout(selection_screen)
 
+        single_button = QPushButton('Одностворчатая дверь')
+        single_button.clicked.connect(lambda: self.singleDoor('Одностворчатое окно'))  # Передача типа окна
+
+        double_button = QPushButton('Двухстворчатая дверь')
+        double_button.clicked.connect(lambda: self.doubleDoor('Двухстворчатое окно'))  # Передача типа окна
+
+
+
+        selection_layout.addWidget(single_button)
+        selection_layout.addWidget(double_button)
+
+
+        self.stacked_widget.addWidget(selection_screen)
+        self.selection_screen_priceSt = selection_screen
+        self.stacked_widget.setCurrentWidget(selection_screen)
+
+        self.back_button.show()
+
+    def singleDoor(self):
+
+        if not hasattr(self, 'input_screen_priceSt'):
+            self.input_screen_priceSt = QWidget()
+            self.input_layout_priceSt = QVBoxLayout(self.input_screen_priceSt)
+
+            self.height_label_window_priceSt = QLabel('Высота (м):')
+            self.height_lineedit_window_priceSt = QLineEdit()
+
+            self.width_label_window_priceSt = QLabel('Ширина (м):')
+            self.width_lineedit_window_priceSt = QLineEdit()
+
+
+            self.calculate_button_window_priceSt = QPushButton('Рассчитать')
+            self.calculate_button_window_priceSt.clicked.connect(self.calculateWindow)
+
+            self.input_layout_priceSt.addWidget(self.height_label_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.height_lineedit_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.width_label_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.width_lineedit_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.calculate_button_window_priceSt)
+
+            self.stacked_widget.addWidget(self.input_screen_priceSt)
+
+        self.stacked_widget.removeWidget(self.selection_screen_priceSt)
+        self.stacked_widget.setCurrentWidget(self.input_screen_priceSt)
+        self.back_button.show()
+
+    def doubleDoor(self):
+        if not hasattr(self, 'input_screen_priceSt'):
+            self.input_screen_priceSt = QWidget()
+            self.input_layout_priceSt = QVBoxLayout(self.input_screen_priceSt)
+
+            self.height_label_window_priceSt = QLabel('Высота (м):')
+            self.height_lineedit_window_priceSt = QLineEdit()
+
+            self.width_label_window_priceSt = QLabel('Ширина (м):')
+            self.width_lineedit_window_priceSt = QLineEdit()
+
+
+            self.calculate_button_window_priceSt = QPushButton('Рассчитать')
+            self.calculate_button_window_priceSt.clicked.connect(self.calculateWindow)
+
+            self.input_layout_priceSt.addWidget(self.height_label_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.height_lineedit_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.width_label_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.width_lineedit_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.calculate_button_window_priceSt)
+
+            self.stacked_widget.addWidget(self.input_screen_priceSt)
+
+        self.stacked_widget.removeWidget(self.selection_screen_priceSt)
+        self.stacked_widget.setCurrentWidget(self.input_screen_priceSt)
+        self.back_button.show()
     def home(self):
         self.selection_screen = QWidget()
         self.selection_layout = QVBoxLayout(self.selection_screen)
@@ -89,13 +163,156 @@ class WindowSelector(QWidget):
         self.double_button.clicked.connect(self.doors)
 
         self.st = QPushButton("Расчет стеклопакета")
-        self.st.clicked.connect(self.doors)
+        self.st.clicked.connect(self.priceSt)
 
         self.selection_layout.addWidget(self.single_button)
         self.selection_layout.addWidget(self.double_button)
         self.selection_layout.addWidget(self.st)
 
         self.stacked_widget.addWidget(self.selection_screen)
+
+    def priceSt(self):
+        print('haha')
+        selection_screen = QWidget()
+        selection_layout = QVBoxLayout(selection_screen)
+
+        single_button = QPushButton('Одностворчатое окно')
+        single_button.clicked.connect(lambda: self.showSingleSize('Одностворчатое окно'))  # Передача типа окна
+
+        double_button = QPushButton('Двухстворчатое окно')
+        double_button.clicked.connect(lambda: self.showSingleSize('Двухстворчатое окно'))  # Передача типа окна
+
+        triple_button = QPushButton('Трехстворчатое окно')
+        triple_button.clicked.connect(lambda: self.calcSingleSize('Трехстворчатое окно'))  # Передача типа окна
+
+        selection_layout.addWidget(single_button)
+        selection_layout.addWidget(double_button)
+        selection_layout.addWidget(triple_button)
+
+        self.stacked_widget.addWidget(selection_screen)
+        self.selection_screen_priceSt = selection_screen
+        self.stacked_widget.setCurrentWidget(selection_screen)
+
+        self.back_button.show()
+
+    def calcSingleSize(self,window_type):
+        self.window_type = window_type  # Сохранение типа окна
+        if not hasattr(self, 'input_screen_priceSt'):
+            self.input_screen_priceSt = QWidget()
+            self.input_layout_priceSt = QVBoxLayout(self.input_screen_priceSt)
+
+            self.height_label_window_priceSt = QLabel('Высота (м):')
+            self.height_lineedit_window_priceSt = QLineEdit()
+
+            self.width_label_window_priceSt = QLabel('Ширина (м):')
+            self.width_lineedit_window_priceSt = QLineEdit()
+
+
+            self.calculate_button_window_priceSt = QPushButton('Рассчитать')
+            self.calculate_button_window_priceSt.clicked.connect(self.calculateWindow)
+
+            self.input_layout_priceSt.addWidget(self.height_label_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.height_lineedit_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.width_label_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.width_lineedit_window_priceSt)
+
+            self.input_layout_priceSt.addWidget(self.calculate_button_window_priceSt)
+
+            self.stacked_widget.addWidget(self.input_screen_priceSt)
+
+        self.stacked_widget.removeWidget(self.selection_screen_priceSt)
+        self.stacked_widget.setCurrentWidget(self.input_screen_priceSt)
+        self.back_button.show()
+
+    def showSingleSize(self, window_type):
+        self.window_type = window_type  # Сохранение типа окна
+        if not hasattr(self, 'input_screen_priceSt'):
+            self.input_screen_priceSt = QWidget()
+            self.input_layout_priceSt = QVBoxLayout(self.input_screen_priceSt)
+
+            self.height_label_window_priceSt = QLabel('Высота (м):')
+            self.height_lineedit_window_priceSt = QLineEdit()
+
+            self.width_label_window_priceSt = QLabel('Ширина (м):')
+            self.width_lineedit_window_priceSt = QLineEdit()
+
+            self.spacer_size_label_window_priceSt = QLabel('Шпатик (мм):')
+            self.spacer_size_lineedit_window_priceSt = QLineEdit()
+
+            self.calculate_button_window_priceSt = QPushButton('Рассчитать')
+            self.calculate_button_window_priceSt.clicked.connect(self.calculateWindow)
+
+            self.input_layout_priceSt.addWidget(self.height_label_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.height_lineedit_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.width_label_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.width_lineedit_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.spacer_size_label_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.spacer_size_lineedit_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.calculate_button_window_priceSt)
+
+            self.stacked_widget.addWidget(self.input_screen_priceSt)
+
+        self.stacked_widget.removeWidget(self.selection_screen_priceSt)
+        self.stacked_widget.setCurrentWidget(self.input_screen_priceSt)
+        self.back_button.show()
+
+    def calculateWindow(self):
+        try:
+            height = float(self.height_lineedit_window_priceSt.text()) * 1000
+            width = float(self.width_lineedit_window_priceSt.text())  * 1000
+            spacer_size = float(self.spacer_size_lineedit_window_priceSt.text())
+
+            # Ширина рамы, импоста и высота рамы (в мм)
+            frame_width = 50
+            mullion_width = 47
+            count_impost = 1
+            first_pack = 0
+            second_pack = 0
+            # В зависимости от типа окна выбираем количество импостов
+            if self.window_type == 'Одностворчатое окно':
+                count_impost = 1
+
+                result_text = f"{X1} x {Y1} * {first_pack} пакета\n{X2} x {Y2} * {second_pack} пакета"
+                self.showResult(result_text)
+            elif self.window_type == 'Двухстворчатое окно':
+                count_impost = 1
+                first_pack = 1
+                second_pack = 1
+            elif self.window_type == 'Трехстворчатое окно':
+                count_impost = 2
+                first_pack = 2
+                second_pack = 1
+
+            # Рассчитываем размеры другого окна
+            leader_window = width - ((count_impost * mullion_width) + (frame_width+frame_width))
+            leader_window -= spacer_size
+            leader_window /= count_impost
+
+            # Рассчитываем размеры пакета стекла
+            X1 = leader_window - 10
+            Y1 = height - frame_width*2
+            Y1 -= 10
+
+            X2 = spacer_size - 124
+            Y2 = height - 228
+
+            # Показываем результат
+            result_text = f"{X1} x {Y1} * {first_pack} пакета\n{X2} x {Y2} * {second_pack} пакета"
+            self.showResult(result_text)
+        except ValueError:
+            print("Ошибка: некорректный формат ввода данных.")
+
+    def showResult(self, result_text):
+        # Выводим результат на экран
+        result_label = QLabel(result_text)
+        self.stacked_widget.addWidget(result_label)
+        self.stacked_widget.setCurrentWidget(result_label)
+
+    def showResult(self, result_text):
+        # Выводим результат на экран
+        result_label = QLabel(result_text)
+        self.stacked_widget.addWidget(result_label)
+        self.stacked_widget.setCurrentWidget(result_label)
 
     def windows(self):
         selection_screen = QWidget()
@@ -132,8 +349,6 @@ class WindowSelector(QWidget):
             self.width_label = QLabel('Ширина (м):')
             self.width_lineedit = QLineEdit()
 
-            self.spacer_size_label = QLabel('Шпатик (мм):')
-            self.spacer_size_lineedit = QLineEdit()
 
             self.calculate_button = QPushButton('Рассчитать')
             self.calculate_button.clicked.connect(self.calculateCost)
@@ -142,8 +357,7 @@ class WindowSelector(QWidget):
             self.input_layout.addWidget(self.height_lineedit)
             self.input_layout.addWidget(self.width_label)
             self.input_layout.addWidget(self.width_lineedit)
-            self.input_layout.addWidget(self.spacer_size_label)
-            self.input_layout.addWidget(self.spacer_size_lineedit)
+
             self.input_layout.addWidget(self.calculate_button)
 
             self.stacked_widget.addWidget(self.input_screen)
@@ -159,7 +373,6 @@ class WindowSelector(QWidget):
         if current_index > 1:
             self.height_lineedit.clear()
             self.width_lineedit.clear()
-            self.spacer_size_lineedit.clear()
 
         self.stacked_widget.setCurrentIndex(next_index)
 
@@ -170,7 +383,6 @@ class WindowSelector(QWidget):
         try:
             height = float(self.height_lineedit.text())
             width = float(self.width_lineedit.text())
-            spacer_size = float(self.spacer_size_lineedit.text())
 
             frame_cost = self.frame_price * (2 * (height + width))
             mullion_cost = self.mullion_price * (2 * (height + width))
