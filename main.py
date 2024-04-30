@@ -143,44 +143,44 @@ class WindowSelector(QWidget):
             X1 = left - 0.21
             X2 = right - 0.21
             Y1 = height - 0.268
-            result_text = f"{X1} x {Y1} * {1} пакета\n{X2} * {Y1} * 1 пакета"
+            result_text = f"Двухстворчатая дверь\n{X1} x {Y1} * {1} пакета\n{X2} * {Y1} * 1 пакета"
             self.showResult(result_text)
         except ValueError:
             print("Ошибка: некорректный формат ввода данных.")
 
     def singleDoor(self):
-        if not hasattr(self, 'input_screen_priceDoor'):
-            self.input_screen_priceDoor = QWidget()
-            self.input_layout_priceDoor = QVBoxLayout(self.input_screen_priceDoor)
+        if not hasattr(self, 'input_screen_priceDoor_One'):
+            self.input_screen_priceDoor_One = QWidget()
+            self.input_layout_priceDoor_One = QVBoxLayout(self.input_screen_priceDoor_One)
 
-            self.height_label_priceDoor = QLabel('Высота (м):')
-            self.height_lineedit_priceDoor = QLineEdit()
+            self.height_label_priceDoor_One = QLabel('Высота (м):')
+            self.height_lineedit_priceDoor_One = QLineEdit()
 
-            self.width_label_priceDoor = QLabel('Ширина (м):')
-            self.width_lineedit_priceDoor = QLineEdit()
+            self.width_label_priceDoor_One = QLabel('Ширина (м):')
+            self.width_lineedit_priceDoor_One = QLineEdit()
 
-            self.calculate_button_priceDoor = QPushButton('Рассчитать')
-            self.calculate_button_priceDoor.clicked.connect(self.calculateSinleDoor)
+            self.calculate_button_priceDoor_One = QPushButton('Рассчитать')
+            self.calculate_button_priceDoor_One.clicked.connect(self.calculateSinleDoor)
 
-            self.input_layout_priceDoor.addWidget(self.height_label_priceDoor)
-            self.input_layout_priceDoor.addWidget(self.height_lineedit_priceDoor)
-            self.input_layout_priceDoor.addWidget(self.width_label_priceDoor)
-            self.input_layout_priceDoor.addWidget(self.width_lineedit_priceDoor)
-            self.input_layout_priceDoor.addWidget(self.calculate_button_priceDoor)
+            self.input_layout_priceDoor_One.addWidget(self.height_label_priceDoor_One)
+            self.input_layout_priceDoor_One.addWidget(self.height_lineedit_priceDoor_One)
+            self.input_layout_priceDoor_One.addWidget(self.width_label_priceDoor_One)
+            self.input_layout_priceDoor_One.addWidget(self.width_lineedit_priceDoor_One)
+            self.input_layout_priceDoor_One.addWidget(self.calculate_button_priceDoor_One)
 
-            self.stacked_widget.addWidget(self.input_screen_priceDoor)
+            self.stacked_widget.addWidget(self.input_screen_priceDoor_One)
 
         self.stacked_widget.removeWidget(self.selection_screen_priceSt)
-        self.stacked_widget.setCurrentWidget(self.input_screen_priceDoor)
+        self.stacked_widget.setCurrentWidget(self.input_screen_priceDoor_One)
         self.back_button.show()
 
     def calculateSinleDoor(self):
         try:
-            height = float(self.height_lineedit_priceDoor.text())
-            width = float(self.width_lineedit_priceDoor.text())
+            height = float(self.height_lineedit_priceDoor_One.text())
+            width = float(self.width_lineedit_priceDoor_One.text())
             X1 = width - 0.29
             Y1 = height - 0.268
-            result_text = f"{X1} x {Y1} * {1} пакета"
+            result_text = f"Одностворчатая дверь\n{X1} x {Y1} * {1} пакета"
             self.showResult(result_text)
         except ValueError:
             print("Ошибка: некорректный формат ввода данных.")
@@ -196,7 +196,7 @@ class WindowSelector(QWidget):
         double_button.clicked.connect(lambda: self.showSingleSize('Двухстворчатое окно'))  # Передача типа окна
 
         triple_button = QPushButton('Трехстворчатое окно')
-        triple_button.clicked.connect(lambda: self.showSingleSize('Трехстворчатое окно'))  # Передача типа окна
+        triple_button.clicked.connect(lambda: self.showThreeSize('Трехстворчатое окно'))  # Передача типа окна
 
         selection_layout.addWidget(single_button)
         selection_layout.addWidget(double_button)
@@ -210,38 +210,37 @@ class WindowSelector(QWidget):
 
     def calcSingleSize(self, window_type):
         self.window_type = window_type  # Сохранение типа окна
-        if not hasattr(self, 'input_screen_priceSt'):
-            self.input_screen_priceSt = QWidget()
-            self.input_layout_priceSt = QVBoxLayout(self.input_screen_priceSt)
+        if not hasattr(self, 'input_screen_priceSt_One'):
+            self.input_screen_priceSt_One = QWidget()
+            self.input_layout_priceSt_One = QVBoxLayout(self.input_screen_priceSt_One)
 
-            self.height_label_window_priceSt = QLabel('Высота (м):')
-            self.height_lineedit_window_priceSt = QLineEdit()
+            self.height_label_window_priceSt_One = QLabel('Высота (м):')
+            self.height_lineedit_window_priceSt_One = QLineEdit()
 
-            self.width_label_window_priceSt = QLabel('Ширина (м):')
-            self.width_lineedit_window_priceSt = QLineEdit()
+            self.width_label_window_priceSt_One = QLabel('Ширина (м):')
+            self.width_lineedit_window_priceSt_One = QLineEdit()
 
-            self.calculate_button_window_priceSt = QPushButton('Рассчитать')
-            self.calculate_button_window_priceSt.clicked.connect(self.calculateWindowSingle)
+            self.calculate_button_window_priceSt_One = QPushButton('Рассчитать')
+            self.calculate_button_window_priceSt_One.clicked.connect(self.calculateWindowSingle)
 
-            self.input_layout_priceSt.addWidget(self.height_label_window_priceSt)
-            self.input_layout_priceSt.addWidget(self.height_lineedit_window_priceSt)
-            self.input_layout_priceSt.addWidget(self.width_label_window_priceSt)
-            self.input_layout_priceSt.addWidget(self.width_lineedit_window_priceSt)
-            self.input_layout_priceSt.addWidget(self.calculate_button_window_priceSt)
+            self.input_layout_priceSt_One.addWidget(self.height_label_window_priceSt_One)
+            self.input_layout_priceSt_One.addWidget(self.height_lineedit_window_priceSt_One)
+            self.input_layout_priceSt_One.addWidget(self.width_label_window_priceSt_One)
+            self.input_layout_priceSt_One.addWidget(self.width_lineedit_window_priceSt_One)
+            self.input_layout_priceSt_One.addWidget(self.calculate_button_window_priceSt_One)
 
-            self.stacked_widget.addWidget(self.input_screen_priceSt)
+            self.stacked_widget.addWidget(self.input_screen_priceSt_One)
 
-        self.stacked_widget.removeWidget(self.selection_screen_priceSt)
-        self.stacked_widget.setCurrentWidget(self.input_screen_priceSt)
+        self.stacked_widget.setCurrentWidget(self.input_screen_priceSt_One)
         self.back_button.show()
 
     def calculateWindowSingle(self):
         try:
-            height = float(self.height_lineedit_window_priceSt.text())
-            width = float(self.width_lineedit_window_priceSt.text())
+            height = float(self.height_lineedit_window_priceSt_One.text())
+            width = float(self.width_lineedit_window_priceSt_One.text())
             X1 = width - 0.1 - 0.124
             Y1 = height - 0.228
-            result_text = f"{X1} x {Y1} * {1} пакета"
+            result_text = f"Одностворчатое окно\n{X1} x {Y1} * {1} пакета"
             self.showResult(result_text)
         except ValueError:
             print("Ошибка: некорректный формат ввода данных.")
@@ -278,6 +277,38 @@ class WindowSelector(QWidget):
         self.stacked_widget.setCurrentWidget(self.input_screen_priceSt)
         self.back_button.show()
 
+
+    def showThreeSize(self, window_type):
+        self.window_type = window_type  # Сохранение типа окна
+        if not hasattr(self, 'input_screen_priceSt_Three'):
+            self.input_screen_priceSt_Three  = QWidget()
+            self.input_layout_priceSt_Three  = QVBoxLayout(self.input_screen_priceSt_Three)
+
+            self.height_label_window_priceSt_Three = QLabel('Высота (м):')
+            self.height_lineedit_window_priceSt_Three  = QLineEdit()
+
+            self.width_label_window_priceSt_Three = QLabel('Ширина (м):')
+            self.width_lineedit_window_priceSt_Three = QLineEdit()
+
+            self.spacer_size_label_window_priceSt_Three = QLabel('Шпатик (мм):')
+            self.spacer_size_lineedit_window_priceSt_Three = QLineEdit()
+
+            self.calculate_button_window_priceSt_Three = QPushButton('Рассчитать')
+            self.calculate_button_window_priceSt_Three.clicked.connect(self.calculateThreeWindow)
+
+            self.input_layout_priceSt_Three.addWidget(self.height_label_window_priceSt_Three)
+            self.input_layout_priceSt_Three.addWidget(self.height_lineedit_window_priceSt_Three)
+            self.input_layout_priceSt_Three.addWidget(self.width_label_window_priceSt_Three)
+            self.input_layout_priceSt_Three.addWidget(self.width_lineedit_window_priceSt_Three)
+            self.input_layout_priceSt_Three.addWidget(self.spacer_size_label_window_priceSt_Three)
+            self.input_layout_priceSt_Three.addWidget(self.spacer_size_lineedit_window_priceSt_Three)
+            self.input_layout_priceSt_Three.addWidget(self.calculate_button_window_priceSt_Three)
+
+            self.stacked_widget.addWidget(self.input_screen_priceSt_Three)
+
+        self.stacked_widget.setCurrentWidget(self.input_screen_priceSt_Three)
+        self.back_button.show()
+
     def calculateWindow(self):
         try:
             height = float(self.height_lineedit_window_priceSt.text())
@@ -288,19 +319,10 @@ class WindowSelector(QWidget):
             frame_width = 0.05
             mullion_width = 0.047
             count_impost = 1
-            first_pack = 0
-            second_pack = 0
+            first_pack = 1
+            second_pack = 1
             # В зависимости от типа окна выбираем количество импостов
-            if self.window_type == 'Одностворчатое окно':
-                count_impost = 1
-            elif self.window_type == 'Двухстворчатое окно':
-                count_impost = 1
-                first_pack = 1
-                second_pack = 1
-            elif self.window_type == 'Трехстворчатое окно':
-                count_impost = 2
-                first_pack = 2
-                second_pack = 1
+
 
             # Рассчитываем размеры другого окна
             leader_window = width - ((count_impost * mullion_width) + (frame_width+frame_width))
@@ -316,7 +338,40 @@ class WindowSelector(QWidget):
             Y2 = height - 0.228
 
             # Показываем результат
-            result_text = f"{X1} x {Y1} * {first_pack} пакета\n{X2} x {Y2} * {second_pack} пакета"
+            result_text = f"Двухстворчатое оконо\n{X1} x {Y1} * {first_pack} пакета\n{X2} x {Y2} * {second_pack} пакета"
+            self.showResult(result_text)
+        except ValueError:
+            print("Ошибка: некорректный формат ввода данных.")
+
+    def calculateThreeWindow(self):
+        try:
+            height = float(self.height_lineedit_window_priceSt_Three.text())
+            width = float(self.width_lineedit_window_priceSt_Three.text())
+            spacer_size = float(self.spacer_size_lineedit_window_priceSt_Three.text())
+
+            # Ширина рамы, импоста и высота рамы (в м)
+            frame_width = 0.05
+            mullion_width = 0.047
+            count_impost = 2
+            first_pack = 2
+            second_pack = 1
+
+
+            # Рассчитываем размеры другого окна
+            leader_window = width - ((count_impost * mullion_width) + (frame_width + frame_width))
+            leader_window -= spacer_size
+            leader_window /= count_impost
+
+            # Рассчитываем размеры пакета стекла
+            X1 = leader_window - 0.01
+            Y1 = height - 0.05 * 2
+            Y1 -= 0.01
+
+            X2 = spacer_size - 0.124
+            Y2 = height - 0.228
+
+            # Показываем результат
+            result_text = f"Трехстворчатое окно\n{X1} x {Y1} * {first_pack} пакета\n{X2} x {Y2} * {second_pack} пакета"
             self.showResult(result_text)
         except ValueError:
             print("Ошибка: некорректный формат ввода данных.")
@@ -325,6 +380,7 @@ class WindowSelector(QWidget):
         # Выводим результат на экран
         result_label = QLabel(result_text)
         self.stacked_widget.addWidget(result_label)
+        self.stacked_widget.removeWidget(self.selection_screen_priceSt)
         self.stacked_widget.setCurrentWidget(result_label)
 
 
@@ -356,7 +412,7 @@ class WindowSelector(QWidget):
 
     def goBack(self):
         current_index = self.stacked_widget.currentIndex()
-        next_index = max(0, current_index - 1)
+        next_index = 0  # Индекс начального экрана
 
         if current_index > 1:
             if hasattr(self, 'height_lineedit'):
@@ -378,7 +434,6 @@ class WindowSelector(QWidget):
 
         if next_index == 0:
             self.back_button.hide()
-
     def calculateCost(self):
         try:
             height = float(self.height_lineedit.text())
