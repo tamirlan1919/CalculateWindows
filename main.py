@@ -1,6 +1,7 @@
 import sys
 import openpyxl
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QStackedWidget, QTableWidget, QTableWidgetItem, QComboBox
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, \
+    QStackedWidget, QTableWidget, QTableWidgetItem, QComboBox, QMessageBox
 
 
 class WindowSelector(QWidget):
@@ -8,6 +9,7 @@ class WindowSelector(QWidget):
         super().__init__()
         self.initUI()
         self.loadPrices()
+        self.costs_dict = {}
         self.window_type = None  # Инициализация атрибута для хранения типа окна
 
     def initUI(self):
@@ -434,50 +436,55 @@ class WindowSelector(QWidget):
 
         if next_index == 0:
             self.back_button.hide()
+
     def calculateCost(self):
         try:
             height = float(self.height_lineedit.text())
             width = float(self.width_lineedit.text())
 
-            frame_cost = self.frame_price * (2 * (height + width))
-            mullion_cost = self.mullion_price * (2 * (height + width))
-            sash_cost = self.sash_price * height
+            # Здесь нужно определить значения frame_price, mullion_price и sash_price
+            frame_cost = 0  # Замените на свои значения
+            mullion_cost = 0  # Замените на свои значения
+            sash_cost = 0  # Замените на свои значения
 
-            total_cost = frame_cost + mullion_cost + sash_cost
 
-            self.showCostTable(frame_cost, mullion_cost, sash_cost, total_cost)
+
+            self.costs_dict = self.loadPrices()
+
+            self.showCostTable(self.costs_dict.items())
+
         except ValueError:
             print("Ошибка: некорректный формат ввода данных.")
 
-    def showCostTable(self, frame_cost, mullion_cost, sash_cost, total_cost):
-        # Удаляем предыдущий экземпляр таблицы, если он существует
+    def showCostTable(self, costs_dict):
         if hasattr(self, 'result_table'):
             self.result_table.deleteLater()
 
         self.result_table = QTableWidget()
-        self.result_table.setRowCount(4)
-        self.result_table.setColumnCount(6)
+        self.result_table.setRowCount(len(costs_dict) + 1)  # +1 для строки с итоговой суммой
+        self.result_table.setColumnCount(5)  # Уменьшено на 1, так как убираем столбец "Цвет"
 
-        headers = ['N', 'Товар', 'Кол-во', 'Единица', 'Сумма', 'Цвет']
+        headers = ['N', 'Товар', 'Кол-во', 'Единица', 'Сумма']
         self.result_table.setHorizontalHeaderLabels(headers)
+        height = float(self.height_lineedit.text())
+        width = float(self.width_lineedit.text())
+        row = 0
+        total_area = 0  # Общая площадь стен
+        total_cost_per_sqm = 0  # Общая стоимость за кв. м.
+        total_cost = 0
+        for item_name, item_cost in costs_dict:  # Исправлено на .items()
+            total_cost += int(item_cost) * 2 * (height + width)
+            row += 1
+            self.result_table.setItem(row - 1, 0, QTableWidgetItem(str(row)))  # Номер строки
+            self.result_table.setItem(row - 1, 1, QTableWidgetItem(item_name))  # Название товара
+            self.result_table.setItem(row - 1, 2, QTableWidgetItem(f'{2 * (height + width)}'))  # Кол-во
+            self.result_table.setItem(row - 1, 3, QTableWidgetItem('м'))  # Единица измерения
+            self.result_table.setItem(row - 1, 4,
+                                      QTableWidgetItem(f'{int(item_cost) * 2 * (height + width)} руб.'))  # Сумма
 
-        items = [
-            ('1', 'Рама', f'{2 * (float(self.height_lineedit.text()) + float(self.width_lineedit.text()))}', 'м',
-             f'{frame_cost} руб.', ''),
-            ('2', 'Импост', f'{2 * (float(self.height_lineedit.text()) + float(self.width_lineedit.text()))}', 'м',
-             f'{mullion_cost} руб.', ''),
-            ('3', 'Створка', f'{float(self.height_lineedit.text())}', 'м', f'{sash_cost} руб.', ''),
-            ('', '', '', 'Итого:', f'{total_cost} руб.', '')
-        ]
-
-        for row, item in enumerate(items):
-            for col, data in enumerate(item):
-                if col == 5:
-                    combobox = QComboBox()
-                    combobox.addItems(['Белый', 'Комбинированный', 'Цельный'])
-                    self.result_table.setCellWidget(row - 1, col, combobox)
-                else:
-                    self.result_table.setItem(row, col, QTableWidgetItem(data))
+        # Строка с итоговой суммой
+        self.result_table.setItem(row, 3, QTableWidgetItem('Итого:'))
+        self.result_table.setItem(row, 4, QTableWidgetItem(f'{total_cost} руб.'))
 
         self.result_table.resizeColumnsToContents()
         self.result_table.setWindowTitle('Результат расчета стоимости')
@@ -485,18 +492,32 @@ class WindowSelector(QWidget):
 
         self.stacked_widget.addWidget(self.result_table)
         self.stacked_widget.setCurrentWidget(self.result_table)
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self, 'Message', 'Are you sure to quit?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+
 
     def loadPrices(self):
-
         wb = openpyxl.load_workbook('file.xlsx')
         sheet = wb.active
-        print(sheet['A2'].value)
-        self.frame_price = float(sheet['A2'].value)
-        self.mullion_price = float(sheet['B2'].value)
-        self.sash_price = float(sheet['C2'].value)
+        self.costs_dict = {}
+
+        # Получаем значения по столбцам
+        item_names = [cell.value for cell in sheet[1] if cell.value is not None]  # Названия товаров
+        item_costs = [cell.value for cell in sheet[2] if cell.value is not None]  # Стоимости товаров
+
+        # Формируем словарь
+        for name, cost in zip(item_names, item_costs):
+            self.costs_dict[name] = cost
 
 
+        return self.costs_dict
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = WindowSelector()
+    mainWindow = WindowSelector()
+    mainWindow.show()
     sys.exit(app.exec_())
