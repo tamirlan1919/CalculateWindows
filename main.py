@@ -103,10 +103,10 @@ class WindowSelector(QWidget):
             self.input_screen_priceDoor = QWidget()
             self.input_layout_priceDoor = QVBoxLayout(self.input_screen_priceDoor)
 
-            self.height_label_priceDoor = QLabel('Высота (м):')
+            self.height_label_priceDoor = QLabel('Высота (мм):')
             self.height_lineedit_priceDoor = QLineEdit()
 
-            self.width_label_priceDoor = QLabel('Ширина (м):')
+            self.width_label_priceDoor = QLabel('Ширина (мм):')
             self.width_lineedit_priceDoor = QLineEdit()
 
             self.left_label_priceDoor = QLabel('Левая дверь (мм):')
@@ -142,9 +142,9 @@ class WindowSelector(QWidget):
             left = float(self.left_lineedit_priceDoor.text())
             right = float(self.right_lineedit_priceDoor.text())
 
-            X1 = left - 0.21
-            X2 = right - 0.21
-            Y1 = height - 0.268
+            X1 = left - 210
+            X2 = right - 210
+            Y1 = height - 268
             result_text = f"Двухстворчатая дверь\n{X1} x {Y1} * {1} пакета\n{X2} * {Y1} * 1 пакета"
             self.showResult(result_text)
         except ValueError:
@@ -155,10 +155,10 @@ class WindowSelector(QWidget):
             self.input_screen_priceDoor_One = QWidget()
             self.input_layout_priceDoor_One = QVBoxLayout(self.input_screen_priceDoor_One)
 
-            self.height_label_priceDoor_One = QLabel('Высота (м):')
+            self.height_label_priceDoor_One = QLabel('Высота (мм):')
             self.height_lineedit_priceDoor_One = QLineEdit()
 
-            self.width_label_priceDoor_One = QLabel('Ширина (м):')
+            self.width_label_priceDoor_One = QLabel('Ширина (мм):')
             self.width_lineedit_priceDoor_One = QLineEdit()
 
             self.calculate_button_priceDoor_One = QPushButton('Рассчитать')
@@ -180,8 +180,8 @@ class WindowSelector(QWidget):
         try:
             height = float(self.height_lineedit_priceDoor_One.text())
             width = float(self.width_lineedit_priceDoor_One.text())
-            X1 = width - 0.29
-            Y1 = height - 0.268
+            X1 = width - 290
+            Y1 = height - 268
             result_text = f"Одностворчатая дверь\n{X1} x {Y1} * {1} пакета"
             self.showResult(result_text)
         except ValueError:
@@ -216,10 +216,10 @@ class WindowSelector(QWidget):
             self.input_screen_priceSt_One = QWidget()
             self.input_layout_priceSt_One = QVBoxLayout(self.input_screen_priceSt_One)
 
-            self.height_label_window_priceSt_One = QLabel('Высота (м):')
+            self.height_label_window_priceSt_One = QLabel('Высота (мм):')
             self.height_lineedit_window_priceSt_One = QLineEdit()
 
-            self.width_label_window_priceSt_One = QLabel('Ширина (м):')
+            self.width_label_window_priceSt_One = QLabel('Ширина (мм):')
             self.width_lineedit_window_priceSt_One = QLineEdit()
 
             self.calculate_button_window_priceSt_One = QPushButton('Рассчитать')
@@ -240,8 +240,8 @@ class WindowSelector(QWidget):
         try:
             height = float(self.height_lineedit_window_priceSt_One.text())
             width = float(self.width_lineedit_window_priceSt_One.text())
-            X1 = width - 0.1 - 0.124
-            Y1 = height - 0.228
+            X1 = width - 10 - 124
+            Y1 = height - 228
             result_text = f"Одностворчатое окно\n{X1} x {Y1} * {1} пакета"
             self.showResult(result_text)
         except ValueError:
@@ -253,10 +253,10 @@ class WindowSelector(QWidget):
             self.input_screen_priceSt = QWidget()
             self.input_layout_priceSt = QVBoxLayout(self.input_screen_priceSt)
 
-            self.height_label_window_priceSt = QLabel('Высота (м):')
+            self.height_label_window_priceSt = QLabel('Высота (мм):')
             self.height_lineedit_window_priceSt = QLineEdit()
 
-            self.width_label_window_priceSt = QLabel('Ширина (м):')
+            self.width_label_window_priceSt = QLabel('Ширина (мм):')
             self.width_lineedit_window_priceSt = QLineEdit()
 
             self.spacer_size_label_window_priceSt = QLabel('Шпатик (мм):')
@@ -286,10 +286,10 @@ class WindowSelector(QWidget):
             self.input_screen_priceSt_Three  = QWidget()
             self.input_layout_priceSt_Three  = QVBoxLayout(self.input_screen_priceSt_Three)
 
-            self.height_label_window_priceSt_Three = QLabel('Высота (м):')
+            self.height_label_window_priceSt_Three = QLabel('Высота (мм):')
             self.height_lineedit_window_priceSt_Three  = QLineEdit()
 
-            self.width_label_window_priceSt_Three = QLabel('Ширина (м):')
+            self.width_label_window_priceSt_Three = QLabel('Ширина (мм):')
             self.width_lineedit_window_priceSt_Three = QLineEdit()
 
             self.spacer_size_label_window_priceSt_Three = QLabel('Шпатик (мм):')
@@ -318,8 +318,8 @@ class WindowSelector(QWidget):
             spacer_size = float(self.spacer_size_lineedit_window_priceSt.text())
 
             # Ширина рамы, импоста и высота рамы (в м)
-            frame_width = 0.05
-            mullion_width = 0.047
+            frame_width = 50
+            mullion_width = 47
             count_impost = 1
             first_pack = 1
             second_pack = 1
@@ -332,12 +332,12 @@ class WindowSelector(QWidget):
             leader_window /= count_impost
 
             # Рассчитываем размеры пакета стекла
-            X1 = leader_window - 0.01
-            Y1 = height - 0.05*2
-            Y1 -= 0.01
+            X1 = leader_window - 10
+            Y1 = height - 110
 
-            X2 = spacer_size - 0.124
-            Y2 = height - 0.228
+
+            X2 = spacer_size - 124
+            Y2 = height - 228
 
             # Показываем результат
             result_text = f"Двухстворчатое оконо\n{X1} x {Y1} * {first_pack} пакета\n{X2} x {Y2} * {second_pack} пакета"
@@ -352,8 +352,8 @@ class WindowSelector(QWidget):
             spacer_size = float(self.spacer_size_lineedit_window_priceSt_Three.text())
 
             # Ширина рамы, импоста и высота рамы (в м)
-            frame_width = 0.05
-            mullion_width = 0.047
+            frame_width = 50
+            mullion_width = 47
             count_impost = 2
             first_pack = 2
             second_pack = 1
@@ -365,12 +365,12 @@ class WindowSelector(QWidget):
             leader_window /= count_impost
 
             # Рассчитываем размеры пакета стекла
-            X1 = leader_window - 0.01
-            Y1 = height - 0.05 * 2
-            Y1 -= 0.01
+            X1 = leader_window - 10
+            Y1 = height - 110
 
-            X2 = spacer_size - 0.124
-            Y2 = height - 0.228
+
+            X2 = spacer_size - 124
+            Y2 = height - 228
 
             # Показываем результат
             result_text = f"Трехстворчатое окно\n{X1} x {Y1} * {first_pack} пакета\n{X2} x {Y2} * {second_pack} пакета"
@@ -391,10 +391,10 @@ class WindowSelector(QWidget):
             self.input_screen = QWidget()
             self.input_layout = QVBoxLayout(self.input_screen)
 
-            self.height_label = QLabel('Высота (м):')
+            self.height_label = QLabel('Высота (мм):')
             self.height_lineedit = QLineEdit()
 
-            self.width_label = QLabel('Ширина (м):')
+            self.width_label = QLabel('Ширина (мм):')
             self.width_lineedit = QLineEdit()
 
             self.calculate_button = QPushButton('Рассчитать')
