@@ -23,18 +23,17 @@ class WindowSelector(QWidget):
         self.selection_screen = QWidget()
         self.selection_layout = QVBoxLayout(self.selection_screen)
 
-        self.single_button = QPushButton("Стекла")
-        self.single_button.clicked.connect(self.showSize)
+        self.single_button = QPushButton("Себестоимость")
+        self.single_button.clicked.connect(self.choose_window)
 
-        self.double_button = QPushButton("Двери")
-        self.double_button.clicked.connect(self.doors)
+        self.single_button_st = QPushButton("Стекла")
+        self.single_button_st.clicked.connect(self.showStekla)
 
-        self.st = QPushButton("Расчет стеклопакета")
-        self.st.clicked.connect(self.priceSt)
+
 
         self.selection_layout.addWidget(self.single_button)
-        self.selection_layout.addWidget(self.double_button)
-        self.selection_layout.addWidget(self.st)
+        self.selection_layout.addWidget(self.single_button_st)
+
 
         self.stacked_widget.addWidget(self.selection_screen)
 
@@ -385,11 +384,56 @@ class WindowSelector(QWidget):
         self.stacked_widget.removeWidget(self.selection_screen_priceSt)
         self.stacked_widget.setCurrentWidget(result_label)
 
-
-    def showSize(self):
+    def showStekla(self):
         if not hasattr(self, 'input_screen'):
             self.input_screen = QWidget()
             self.input_layout = QVBoxLayout(self.input_screen)
+
+            self.double_button = QPushButton("Дверь")
+            self.double_button.clicked.connect(self.doors)
+
+            self.st = QPushButton("Окно")
+            self.st.clicked.connect(self.priceSt)
+
+            self.input_layout.addWidget(self.double_button)
+            self.input_layout.addWidget(self.st)
+
+
+
+            self.stacked_widget.addWidget(self.input_screen)
+
+        self.stacked_widget.setCurrentWidget(self.input_screen)
+        self.back_button.show()
+
+
+    # def chooseStvor(self):
+    #     selection_screen_stvor = QWidget()
+    #     selection_layout_stvor  = QVBoxLayout(selection_screen_stvor)
+    #
+    #     single_button = QPushButton('Одностворчатое окно')
+    #     single_button.clicked.connect(lambda: self.calcSingleSize('Одностворчатое окно'))  # Передача типа окна
+    #
+    #     double_button = QPushButton('Двухстворчатое окно')
+    #     double_button.clicked.connect(lambda: self.showSingleSize('Двухстворчатое окно'))  # Передача типа окна
+    #
+    #     triple_button = QPushButton('Трехстворчатое окно')
+    #     triple_button.clicked.connect(lambda: self.showThreeSize('Трехстворчатое окно'))  # Передача типа окна
+    #
+    #     selection_layout_stvor.addWidget(single_button)
+    #     selection_layout_stvor.addWidget(double_button)
+    #     selection_layout_stvor.addWidget(triple_button)
+    #
+    #     self.stacked_widget.addWidget(selection_screen_stvor)
+    #     self.selection_screen_priceSt = selection_screen_stvor
+    #     self.stacked_widget.setCurrentWidget(selection_screen_stvor)
+    #
+    #     self.back_button.show()
+
+
+    def showSize(self):
+        if not hasattr(self, 'input_screen_stekla'):
+            self.input_screen_stekla = QWidget()
+            self.input_layout_stekla = QVBoxLayout(self.input_screen_stekla)
 
             self.height_label = QLabel('Высота (мм):')
             self.height_lineedit = QLineEdit()
@@ -397,20 +441,86 @@ class WindowSelector(QWidget):
             self.width_label = QLabel('Ширина (мм):')
             self.width_lineedit = QLineEdit()
 
+            self.btn = QLabel('Штапик (мм):')
+            self.btn_edit = QLineEdit()
+
             self.calculate_button = QPushButton('Рассчитать')
             self.calculate_button.clicked.connect(self.calculateCost)
 
-            self.input_layout.addWidget(self.height_label)
-            self.input_layout.addWidget(self.height_lineedit)
-            self.input_layout.addWidget(self.width_label)
-            self.input_layout.addWidget(self.width_lineedit)
+            self.input_layout_stekla.addWidget(self.height_label)
+            self.input_layout_stekla.addWidget(self.height_lineedit)
+            self.input_layout_stekla.addWidget(self.width_label)
+            self.input_layout_stekla.addWidget(self.width_lineedit)
+            self.input_layout_stekla.addWidget(self.btn)
+            self.input_layout_stekla.addWidget(self.btn_edit)
 
-            self.input_layout.addWidget(self.calculate_button)
+            self.input_layout_stekla.addWidget(self.calculate_button)
 
-            self.stacked_widget.addWidget(self.input_screen)
+            self.stacked_widget.addWidget(self.input_screen_stekla)
 
-        self.stacked_widget.setCurrentWidget(self.input_screen)
+        self.stacked_widget.setCurrentWidget(self.input_screen_stekla)
         self.back_button.show()
+
+    def calcDoubleWindow(self):
+        if not hasattr(self, 'input_screen_stekla_Double'):
+            self.input_screen_stekla_Double = QWidget()
+            self.input_layout_stekla_Double = QVBoxLayout(self.input_screen_stekla_Double)
+
+            self.height_label_Double = QLabel('Высота (мм):')
+            self.height_lineedit_Double = QLineEdit()
+
+            self.width_label_Double = QLabel('Ширина (мм):')
+            self.width_lineedit_Double = QLineEdit()
+
+            self.btn_Double = QLabel('Штапик (мм):')
+            self.btn_edit_Double = QLineEdit()
+
+            self.calculate_button_Double = QPushButton('Рассчитать')
+            self.calculate_button_Double.clicked.connect(self.calculateCostDouble)
+
+            self.input_layout_stekla_Double.addWidget(self.height_label_Double)
+            self.input_layout_stekla_Double.addWidget(self.height_lineedit_Double)
+            self.input_layout_stekla_Double.addWidget(self.width_label_Double)
+            self.input_layout_stekla_Double.addWidget(self.width_lineedit_Double)
+            self.input_layout_stekla_Double.addWidget(self.btn_Double)
+            self.input_layout_stekla_Double.addWidget(self.btn_edit_Double)
+            self.input_layout_stekla_Double.addWidget(self.calculate_button_Double)
+
+
+
+            self.stacked_widget.addWidget(self.input_screen_stekla_Double)
+
+        self.stacked_widget.setCurrentWidget(self.input_screen_stekla_Double)
+        self.back_button.show()
+
+    def calcOneWindow(self):
+        if not hasattr(self, 'input_screen_stekla_One'):
+            self.input_screen_stekla_One = QWidget()
+            self.input_layout_stekla_One = QVBoxLayout(self.input_screen_stekla_One)
+
+            self.height_label_One = QLabel('Высота (мм):')
+            self.height_lineedit_One = QLineEdit()
+
+            self.width_label_One = QLabel('Ширина (мм):')
+            self.width_lineedit_One = QLineEdit()
+
+
+            self.calculate_button_One = QPushButton('Рассчитать')
+            self.calculate_button_One.clicked.connect(self.calculateCost)
+
+            self.input_layout_stekla_One.addWidget(self.height_label_One)
+            self.input_layout_stekla_One.addWidget(self.height_lineedit_One)
+            self.input_layout_stekla_One.addWidget(self.width_label_One)
+            self.input_layout_stekla_One.addWidget(self.width_lineedit_One)
+
+
+            self.input_layout_stekla_One.addWidget(self.calculate_button_One)
+
+            self.stacked_widget.addWidget(self.input_screen_stekla_One)
+
+        self.stacked_widget.setCurrentWidget(self.input_screen_stekla_One)
+        self.back_button.show()
+
 
     def goBack(self):
         current_index = self.stacked_widget.currentIndex()
@@ -437,10 +547,35 @@ class WindowSelector(QWidget):
         if next_index == 0:
             self.back_button.hide()
 
-    def calculateCost(self):
+    def choose_window(self):
+        selection_screen_new = QWidget()
+        selection_layout_new  = QVBoxLayout(selection_screen_new)
+
+        single_button = QPushButton('Одностворч')
+        single_button.clicked.connect(self.calcOneWindow)  # Передача типа окна
+
+        double_button = QPushButton('Двухстворч')
+        double_button.clicked.connect(self.calcDoubleWindow)  # Передача типа окна
+
+        triple_button = QPushButton('Трехстворч')
+        triple_button.clicked.connect(lambda: self.showThreeSize('Трехстворч'))  # Передача типа окна
+
+        selection_layout_new.addWidget(single_button)
+        selection_layout_new.addWidget(double_button)
+        selection_layout_new.addWidget(triple_button)
+
+        self.stacked_widget.addWidget(selection_screen_new)
+        self.selection_screen_priceSt = selection_screen_new
+        self.stacked_widget.setCurrentWidget(selection_screen_new)
+
+        self.back_button.show()
+
+
+    def calculateCost_One(self):
         try:
             height = float(self.height_lineedit.text())
             width = float(self.width_lineedit.text())
+            shtapik = float(self.btn_edit.text())
 
             # Здесь нужно определить значения frame_price, mullion_price и sash_price
             frame_cost = 0  # Замените на свои значения
@@ -456,7 +591,29 @@ class WindowSelector(QWidget):
         except ValueError:
             print("Ошибка: некорректный формат ввода данных.")
 
-    def showCostTable(self, costs_dict):
+    def calculateCostDouble(self):
+        try:
+            height = float(self.height_lineedit_Double.text())
+            width = float(self.width_lineedit_Double.text())
+            shtapik = float(self.btn_edit_Double.text())
+
+            # Здесь нужно определить значения frame_price, mullion_price и sash_price
+            frame_cost = 0  # Замените на свои значения
+            mullion_cost = 0  # Замените на свои значения
+            sash_cost = 0  # Замените на свои значения
+
+
+
+            self.costs_dict = self.loadPrices()
+
+
+
+            self.showCostTable_Double(self.costs_dict)
+
+        except ValueError:
+            print("Ошибка: некорректный формат ввода данных.")
+
+    def showCostTable_Double(self, costs_dict):
         if hasattr(self, 'result_table'):
             self.result_table.deleteLater()
 
@@ -466,8 +623,26 @@ class WindowSelector(QWidget):
 
         headers = ['N', 'Товар', 'Кол-во', 'Единица', 'Сумма']
         self.result_table.setHorizontalHeaderLabels(headers)
-        height = float(self.height_lineedit.text())
-        width = float(self.width_lineedit.text())
+        height = float(self.height_lineedit_Double.text())
+        width = float(self.width_lineedit_Double.text())
+        shtapik = float(self.btn_edit_Double.text())
+
+        stvorchat = 1
+        rama = (height + width) * 2
+        impost = (height-100) * 1
+        stvor = ((height - 100) + shtapik) * 2
+        shtapik = (rama + impost) * 2
+        metall = (rama + impost + stvor)
+        rezina = ((rama + impost) * 2) + (stvor * 2)
+        steklo = (height + width) * 0.75
+        print(costs_dict.get('Рама'))
+
+        # zamok = 1 * из файла цена замка
+        # petlya = 1 * из файла цена петли
+        # ruchka = 1 * из файла цена ручки
+        # proizvod = (height*width) + из файла цена производства
+        # montazh = 1 * из файла цена монтажа
+        # prochee = 1 * из файла цена прочее
         row = 0
         total_area = 0  # Общая площадь стен
         total_cost_per_sqm = 0  # Общая стоимость за кв. м.
@@ -492,13 +667,53 @@ class WindowSelector(QWidget):
 
         self.stacked_widget.addWidget(self.result_table)
         self.stacked_widget.setCurrentWidget(self.result_table)
-    def closeEvent(self, event):
-        reply = QMessageBox.question(self, 'Message', 'Are you sure to quit?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
-        if reply == QMessageBox.Yes:
-            event.accept()
-        else:
-            event.ignore()
+    def showCostTable_One(self, costs_dict):
+        if hasattr(self, 'result_table'):
+            self.result_table.deleteLater()
+
+        self.result_table = QTableWidget()
+        self.result_table.setRowCount(len(costs_dict) + 1)  # +1 для строки с итоговой суммой
+        self.result_table.setColumnCount(5)  # Уменьшено на 1, так как убираем столбец "Цвет"
+
+        headers = ['N', 'Товар', 'Кол-во', 'Единица', 'Сумма']
+        self.result_table.setHorizontalHeaderLabels(headers)
+        height = float(self.height_lineedit_One.text())
+        width = float(self.width_lineedit_One.text())
+
+        stvorchat = 1
+        rama = (height+width) * 2
+        stvor = height - 100
+        shtapik = rama
+        metall = rama + stvor
+        rezina = rama + stvor
+        steklo = (height+width) * 0.75
+
+
+        row = 0
+        total_area = 0  # Общая площадь стен
+        total_cost_per_sqm = 0  # Общая стоимость за кв. м.
+        total_cost = 0
+        for item_name, item_cost in costs_dict:  # Исправлено на .items()
+            total_cost += int(item_cost) * 2 * (height + width)
+            row += 1
+            self.result_table.setItem(row - 1, 0, QTableWidgetItem(str(row)))  # Номер строки
+            self.result_table.setItem(row - 1, 1, QTableWidgetItem(item_name))  # Название товара
+            self.result_table.setItem(row - 1, 2, QTableWidgetItem(f'{2 * (height + width)}'))  # Кол-во
+            self.result_table.setItem(row - 1, 3, QTableWidgetItem('м'))  # Единица измерения
+            self.result_table.setItem(row - 1, 4,
+                                      QTableWidgetItem(f'{int(item_cost) * 2 * (height + width)} руб.'))  # Сумма
+
+        # Строка с итоговой суммой
+        self.result_table.setItem(row, 3, QTableWidgetItem('Итого:'))
+        self.result_table.setItem(row, 4, QTableWidgetItem(f'{total_cost} руб.'))
+
+        self.result_table.resizeColumnsToContents()
+        self.result_table.setWindowTitle('Результат расчета стоимости')
+        self.result_table.show()
+
+        self.stacked_widget.addWidget(self.result_table)
+        self.stacked_widget.setCurrentWidget(self.result_table)
 
 
     def loadPrices(self):
@@ -508,7 +723,9 @@ class WindowSelector(QWidget):
 
         # Получаем значения по столбцам
         item_names = [cell.value for cell in sheet[1] if cell.value is not None]  # Названия товаров
-        item_costs = [cell.value for cell in sheet[2] if cell.value is not None]  # Стоимости товаров
+        item_ed = [cell.value for cell in sheet[2] if cell.value is not None]  # Еденица товара
+        item_costs = [cell.value for cell in sheet[3] if cell.value is not None]  # Стоимости товаров
+
 
         # Формируем словарь
         for name, cost in zip(item_names, item_costs):
@@ -516,6 +733,16 @@ class WindowSelector(QWidget):
 
 
         return self.costs_dict
+
+
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self, 'Message', 'Are you sure to quit?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     mainWindow = WindowSelector()
