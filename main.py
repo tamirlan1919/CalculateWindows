@@ -406,28 +406,6 @@ class WindowSelector(QWidget):
         self.back_button.show()
 
 
-    # def chooseStvor(self):
-    #     selection_screen_stvor = QWidget()
-    #     selection_layout_stvor  = QVBoxLayout(selection_screen_stvor)
-    #
-    #     single_button = QPushButton('Одностворчатое окно')
-    #     single_button.clicked.connect(lambda: self.calcSingleSize('Одностворчатое окно'))  # Передача типа окна
-    #
-    #     double_button = QPushButton('Двухстворчатое окно')
-    #     double_button.clicked.connect(lambda: self.showSingleSize('Двухстворчатое окно'))  # Передача типа окна
-    #
-    #     triple_button = QPushButton('Трехстворчатое окно')
-    #     triple_button.clicked.connect(lambda: self.showThreeSize('Трехстворчатое окно'))  # Передача типа окна
-    #
-    #     selection_layout_stvor.addWidget(single_button)
-    #     selection_layout_stvor.addWidget(double_button)
-    #     selection_layout_stvor.addWidget(triple_button)
-    #
-    #     self.stacked_widget.addWidget(selection_screen_stvor)
-    #     self.selection_screen_priceSt = selection_screen_stvor
-    #     self.stacked_widget.setCurrentWidget(selection_screen_stvor)
-    #
-    #     self.back_button.show()
 
 
     def showSize(self):
@@ -459,6 +437,40 @@ class WindowSelector(QWidget):
             self.stacked_widget.addWidget(self.input_screen_stekla)
 
         self.stacked_widget.setCurrentWidget(self.input_screen_stekla)
+        self.back_button.show()
+
+
+
+    def calcThreeWindow(self):
+        if not hasattr(self, 'input_screen_stekla_Three'):
+            self.input_screen_stekla_Three = QWidget()
+            self.input_layout_stekla_Three= QVBoxLayout(self.input_screen_stekla_Three)
+
+            self.height_label_Three = QLabel('Высота (мм):')
+            self.height_lineedit_Three = QLineEdit()
+
+            self.width_label_Three= QLabel('Ширина (мм):')
+            self.width_lineedit_Three = QLineEdit()
+
+            self.btn_Three = QLabel('Штапик (мм):')
+            self.btn_edit_Three = QLineEdit()
+
+            self.calculate_button_Three = QPushButton('Рассчитать')
+            self.calculate_button_Three.clicked.connect(self.calculateCostThree)
+
+            self.input_layout_stekla_Three.addWidget(self.height_label_Three)
+            self.input_layout_stekla_Three.addWidget(self.height_lineedit_Three)
+            self.input_layout_stekla_Three.addWidget(self.width_label_Three)
+            self.input_layout_stekla_Three.addWidget(self.width_lineedit_Three)
+            self.input_layout_stekla_Three.addWidget(self.btn_Three)
+            self.input_layout_stekla_Three.addWidget(self.btn_edit_Three)
+            self.input_layout_stekla_Three.addWidget(self.calculate_button_Three)
+
+
+
+            self.stacked_widget.addWidget(self.input_screen_stekla_Three)
+
+        self.stacked_widget.setCurrentWidget(self.input_screen_stekla_Three)
         self.back_button.show()
 
     def calcDoubleWindow(self):
@@ -506,7 +518,7 @@ class WindowSelector(QWidget):
 
 
             self.calculate_button_One = QPushButton('Рассчитать')
-            self.calculate_button_One.clicked.connect(self.calculateCost)
+            self.calculate_button_One.clicked.connect(self.calculateCost_One)
 
             self.input_layout_stekla_One.addWidget(self.height_label_One)
             self.input_layout_stekla_One.addWidget(self.height_lineedit_One)
@@ -541,6 +553,29 @@ class WindowSelector(QWidget):
                 self.height_lineedit_priceDoor.clear()
             if hasattr(self, 'width_lineedit_priceDoor'):
                 self.width_lineedit_priceDoor.clear()
+                self.left_lineedit_priceDoor.clear()
+                self.right_lineedit_priceDoor.clear()
+            if hasattr(self, 'width_lineedit_priceDoor_One'):
+                self.height_lineedit_priceDoor_One.clear()
+                self.width_lineedit_priceDoor_One.clear()
+            if hasattr(self, 'height_label_One'):
+                self.height_label_One.clear()
+                self.width_label_One.clear()
+            if hasattr(self, 'height_label_Double'):
+                self.height_label_Double.clear()
+                self.width_label_Double.clear()
+                self.btn_Double.clear()
+            if hasattr(self, 'height_label_Three'):
+                self.height_label_Three.clear()
+                self.width_label_Three.clear()
+                self.btn_Three.clear()
+            if hasattr(self, 'input_screen_priceSt_One'):
+                self.height_label_window_priceSt_One.clear()
+                self.width_label_window_priceSt_One.clear()
+
+
+
+
 
         self.stacked_widget.setCurrentIndex(next_index)
 
@@ -558,7 +593,7 @@ class WindowSelector(QWidget):
         double_button.clicked.connect(self.calcDoubleWindow)  # Передача типа окна
 
         triple_button = QPushButton('Трехстворч')
-        triple_button.clicked.connect(lambda: self.showThreeSize('Трехстворч'))  # Передача типа окна
+        triple_button.clicked.connect(self.calcThreeWindow)  # Передача типа окна
 
         selection_layout_new.addWidget(single_button)
         selection_layout_new.addWidget(double_button)
@@ -571,11 +606,11 @@ class WindowSelector(QWidget):
         self.back_button.show()
 
 
-    def calculateCost_One(self):
+    def calculateCostThree(self):
         try:
-            height = float(self.height_lineedit.text())
-            width = float(self.width_lineedit.text())
-            shtapik = float(self.btn_edit.text())
+            height = float(self.height_lineedit_Three.text())
+            width = float(self.width_lineedit_Three.text())
+            shtapik = float(self.btn_edit_Three.text())
 
             # Здесь нужно определить значения frame_price, mullion_price и sash_price
             frame_cost = 0  # Замените на свои значения
@@ -586,7 +621,25 @@ class WindowSelector(QWidget):
 
             self.costs_dict = self.loadPrices()
 
-            self.showCostTable(self.costs_dict.items())
+            self.showCostTable_Three(self.costs_dict)
+        except ValueError:
+            print("Ошибка: некорректный формат ввода данных.")
+
+    def calculateCost_One(self):
+        try:
+            height = float(self.height_lineedit_One.text())
+            width = float(self.width_lineedit_One.text())
+
+            # Здесь нужно определить значения frame_price, mullion_price и sash_price
+            frame_cost = 0  # Замените на свои значения
+            mullion_cost = 0  # Замените на свои значения
+            sash_cost = 0  # Замените на свои значения
+
+
+
+            self.costs_dict = self.loadPrices()
+
+            self.showCostTable_One(self.costs_dict)
 
         except ValueError:
             print("Ошибка: некорректный формат ввода данных.")
@@ -613,53 +666,153 @@ class WindowSelector(QWidget):
         except ValueError:
             print("Ошибка: некорректный формат ввода данных.")
 
+
+    def showCostTable_Three(self,costs_dict):
+        if hasattr(self, 'result_table'):
+            self.result_table.deleteLater()
+
+        self.result_table = QTableWidget()
+        self.result_table.setRowCount(len(costs_dict) + 1)  # +1 для строки с итоговой суммой
+        self.result_table.setColumnCount(7)  # Добавлен один столбец для суммы
+
+        headers = ['N', 'Наименование', 'Кол-во', 'Единица', 'Цена', 'Сумма']
+        self.result_table.setHorizontalHeaderLabels(headers)
+
+        height = float(self.height_lineedit_Three.text())  / 1000
+        width = float(self.width_lineedit_Three.text()) / 1000
+        shtapik = float(self.btn_edit_Three.text()) / 1000
+
+        rama = (height + width) * 2
+        impost = (height - 0.1) * 2
+        stvor = ((height - 0.1) + shtapik) * 2
+        shtapik = rama + impost * 2
+        metall = (rama + impost + stvor)
+        rezina = rama + impost* 2 + stvor * 2
+        steklo = (height * width) * 0.75
+
+        row = 0
+        total_cost = 0
+
+        for item_name, item_cost in costs_dict.items():
+            total_cost_item = float(item_cost[-1] ) # Цена товара из Excel
+            count = 1 if item_name in ['Замок', 'Петля', 'Ручка', 'Монтаж', 'Прочее','Производство'] else 2 * (height + width)
+            count_formula = None
+            if item_name == "Рама":
+                count_formula = rama
+            elif item_name == "Импост":
+                count_formula = impost
+            elif item_name == "Створка":
+                count_formula = stvor
+            elif item_name == "Штапик":
+                count_formula = shtapik
+            elif item_name == "Металл":
+                count_formula = metall
+            elif item_name == "Резина":
+                count_formula = rezina
+            elif item_name == 'Производство':
+                count_formula = (width * height)
+            elif item_name == "Стекло":
+                count_formula = steklo
+            if count_formula is not None:
+                count = count_formula
+            print(type(count),type(total_cost))
+            subtotal = round(total_cost_item * count, 2)  # Сумма товара, округленная до двух знаков
+
+            total_cost += subtotal
+
+            self.result_table.setItem(row, 0, QTableWidgetItem(str(row + 1)))  # Номер строки
+            self.result_table.setItem(row, 1, QTableWidgetItem(item_name))  # Название товара
+            self.result_table.setItem(row, 2, QTableWidgetItem(str(round(count,3))))  # Кол-во
+            self.result_table.setItem(row, 3, QTableWidgetItem(str(item_cost[0])))  # Единица измерения
+            self.result_table.setItem(row, 4, QTableWidgetItem(f'{total_cost_item} руб.'))  # Цена
+            self.result_table.setItem(row, 5, QTableWidgetItem(f'{subtotal} руб.'))  # Сумма
+
+            row += 1
+
+
+        for row in range(self.result_table.rowCount()):
+            combobox = QComboBox()
+            combobox.addItems(['Белый', 'Комбинированный', 'Цельный'])
+            self.result_table.setCellWidget(row-1, 6, combobox)
+
+        # Строка с итоговой суммой
+        self.result_table.setItem(row, 3, QTableWidgetItem('Итого:'))
+        self.result_table.setItem(row, 5, QTableWidgetItem(f'{total_cost} руб.'))
+
+        self.result_table.resizeColumnsToContents()
+        self.result_table.setWindowTitle('Результат расчета стоимости')
+        self.result_table.show()
+
+        self.stacked_widget.addWidget(self.result_table)
+        self.stacked_widget.setCurrentWidget(self.result_table)
+
     def showCostTable_Double(self, costs_dict):
         if hasattr(self, 'result_table'):
             self.result_table.deleteLater()
 
         self.result_table = QTableWidget()
         self.result_table.setRowCount(len(costs_dict) + 1)  # +1 для строки с итоговой суммой
-        self.result_table.setColumnCount(5)  # Уменьшено на 1, так как убираем столбец "Цвет"
+        self.result_table.setColumnCount(7)  # Добавлен один столбец для суммы
 
-        headers = ['N', 'Товар', 'Кол-во', 'Единица', 'Сумма']
+        headers = ['N', 'Наименование', 'Кол-во', 'Единица', 'Цена', 'Сумма']
         self.result_table.setHorizontalHeaderLabels(headers)
-        height = float(self.height_lineedit_Double.text())
-        width = float(self.width_lineedit_Double.text())
-        shtapik = float(self.btn_edit_Double.text())
 
-        stvorchat = 1
+        height = float(self.height_lineedit_Double.text())  / 1000
+        width = float(self.width_lineedit_Double.text()) / 1000
+        shtapik = float(self.btn_edit_Double.text()) / 1000
+
         rama = (height + width) * 2
-        impost = (height-100) * 1
-        stvor = ((height - 100) + shtapik) * 2
-        shtapik = (rama + impost) * 2
+        impost = (height - 0.1) * 1
+        stvor = ((height - 0.1) + shtapik) * 2
+        shtapik = rama + impost * 2
         metall = (rama + impost + stvor)
-        rezina = ((rama + impost) * 2) + (stvor * 2)
-        steklo = (height + width) * 0.75
-        print(costs_dict.get('Рама'))
+        rezina = rama + impost* 2 + stvor * 2
+        steklo = (height * width) * 0.75
 
-        # zamok = 1 * из файла цена замка
-        # petlya = 1 * из файла цена петли
-        # ruchka = 1 * из файла цена ручки
-        # proizvod = (height*width) + из файла цена производства
-        # montazh = 1 * из файла цена монтажа
-        # prochee = 1 * из файла цена прочее
         row = 0
-        total_area = 0  # Общая площадь стен
-        total_cost_per_sqm = 0  # Общая стоимость за кв. м.
         total_cost = 0
-        for item_name, item_cost in costs_dict:  # Исправлено на .items()
-            total_cost += int(item_cost) * 2 * (height + width)
-            row += 1
-            self.result_table.setItem(row - 1, 0, QTableWidgetItem(str(row)))  # Номер строки
-            self.result_table.setItem(row - 1, 1, QTableWidgetItem(item_name))  # Название товара
-            self.result_table.setItem(row - 1, 2, QTableWidgetItem(f'{2 * (height + width)}'))  # Кол-во
-            self.result_table.setItem(row - 1, 3, QTableWidgetItem('м'))  # Единица измерения
-            self.result_table.setItem(row - 1, 4,
-                                      QTableWidgetItem(f'{int(item_cost) * 2 * (height + width)} руб.'))  # Сумма
 
+        for item_name, item_cost in costs_dict.items():
+            total_cost_item = float(item_cost[-1] ) # Цена товара из Excel
+            count = 1 if item_name in ['Замок', 'Петля', 'Ручка', 'Монтаж', 'Прочее','Производство'] else 2 * (height + width)
+            count_formula = None
+            if item_name == "Рама":
+                count_formula = rama
+            elif item_name == "Импост":
+                count_formula = impost
+            elif item_name == "Створка":
+                count_formula = stvor
+            elif item_name == "Штапик":
+                count_formula = shtapik
+            elif item_name == "Металл":
+                count_formula = metall
+            elif item_name == "Резина":
+                count_formula = rezina
+            elif item_name == "Стекло":
+                count_formula = steklo
+            elif item_name == 'Производство':
+                count_formula = (width * height)
+            if count_formula is not None:
+                count = count_formula
+            subtotal = round(total_cost_item * count, 2)  # Сумма товара, округленная до двух знаков
+
+            total_cost += subtotal
+
+            self.result_table.setItem(row, 0, QTableWidgetItem(str(row + 1)))  # Номер строки
+            self.result_table.setItem(row, 1, QTableWidgetItem(item_name))  # Название товара
+            self.result_table.setItem(row, 2, QTableWidgetItem(str(round(count,3))))  # Кол-во
+            self.result_table.setItem(row, 3, QTableWidgetItem(str(item_cost[0])))  # Единица измерения
+            self.result_table.setItem(row, 4, QTableWidgetItem(f'{total_cost_item} руб.'))  # Цена
+            self.result_table.setItem(row, 5, QTableWidgetItem(f'{subtotal} руб.'))  # Сумма
+
+            row += 1
+        for row in range(self.result_table.rowCount()):
+            combobox = QComboBox()
+            combobox.addItems(['Белый', 'Комбинированный', 'Цельный'])
+            self.result_table.setCellWidget(row-1, 6, combobox)
         # Строка с итоговой суммой
         self.result_table.setItem(row, 3, QTableWidgetItem('Итого:'))
-        self.result_table.setItem(row, 4, QTableWidgetItem(f'{total_cost} руб.'))
+        self.result_table.setItem(row, 5, QTableWidgetItem(f'{total_cost} руб.'))
 
         self.result_table.resizeColumnsToContents()
         self.result_table.setWindowTitle('Результат расчета стоимости')
@@ -674,39 +827,70 @@ class WindowSelector(QWidget):
 
         self.result_table = QTableWidget()
         self.result_table.setRowCount(len(costs_dict) + 1)  # +1 для строки с итоговой суммой
-        self.result_table.setColumnCount(5)  # Уменьшено на 1, так как убираем столбец "Цвет"
+        self.result_table.setColumnCount(7)  # Добавлен один столбец для суммы
 
-        headers = ['N', 'Товар', 'Кол-во', 'Единица', 'Сумма']
+        headers = ['N', 'Наименование', 'Кол-во', 'Единица', 'Цена', 'Сумма']
         self.result_table.setHorizontalHeaderLabels(headers)
-        height = float(self.height_lineedit_One.text())
-        width = float(self.width_lineedit_One.text())
 
-        stvorchat = 1
-        rama = (height+width) * 2
-        stvor = height - 100
+        height = float(self.height_lineedit_One.text()) / 1000
+        width = float(self.width_lineedit_One.text()) / 1000
+
+        rama = (height + width) * 2
+        stvor = ((height - 0.1) + (width - 0.1)) * 2
         shtapik = rama
-        metall = rama + stvor
-        rezina = rama + stvor
-        steklo = (height+width) * 0.75
-
+        metall = (rama  + stvor)
+        rezina = rama * 2 + stvor * 2
+        steklo = (height * width) * 0.75
 
         row = 0
-        total_area = 0  # Общая площадь стен
-        total_cost_per_sqm = 0  # Общая стоимость за кв. м.
         total_cost = 0
-        for item_name, item_cost in costs_dict:  # Исправлено на .items()
-            total_cost += int(item_cost) * 2 * (height + width)
-            row += 1
-            self.result_table.setItem(row - 1, 0, QTableWidgetItem(str(row)))  # Номер строки
-            self.result_table.setItem(row - 1, 1, QTableWidgetItem(item_name))  # Название товара
-            self.result_table.setItem(row - 1, 2, QTableWidgetItem(f'{2 * (height + width)}'))  # Кол-во
-            self.result_table.setItem(row - 1, 3, QTableWidgetItem('м'))  # Единица измерения
-            self.result_table.setItem(row - 1, 4,
-                                      QTableWidgetItem(f'{int(item_cost) * 2 * (height + width)} руб.'))  # Сумма
 
+        for item_name, item_cost in costs_dict.items():
+            total_cost_item = float(item_cost[-1])  # Цена товара из Excel
+            count = 1 if item_name in ['Замок', 'Петля', 'Ручка', 'Монтаж', 'Прочее','Производство'] else 2 * (height + width)
+            count_formula = None
+
+
+            if item_name == "Рама":
+                count_formula = rama
+
+            elif item_name == "Импост":
+                continue
+            elif item_name == "Створка":
+                count_formula = stvor
+            elif item_name == "Штапик":
+                count_formula = shtapik
+            elif item_name == "Металл":
+                count_formula = metall
+            elif item_name == "Резина":
+                count_formula = rezina
+            elif item_name == 'Производство':
+                count_formula = (width * height)
+            elif item_name == "Стекло":
+                count_formula = steklo
+            if count_formula is not None:
+                count = count_formula
+            print(type(count), type(total_cost))
+            subtotal = round(total_cost_item * count, 2)  # Сумма товара, округленная до двух знаков
+
+            total_cost += subtotal
+
+            self.result_table.setItem(row, 0, QTableWidgetItem(str(row + 1)))  # Номер строки
+            self.result_table.setItem(row, 1, QTableWidgetItem(item_name))  # Название товара
+            self.result_table.setItem(row, 2, QTableWidgetItem(str(round(count, 3))))  # Кол-во
+            self.result_table.setItem(row, 3, QTableWidgetItem(str(item_cost[0])))  # Единица измерения
+            self.result_table.setItem(row, 4, QTableWidgetItem(f'{total_cost_item} руб.'))  # Цена
+            self.result_table.setItem(row, 5, QTableWidgetItem(f'{subtotal} руб.'))  # Сумма
+
+            row += 1
+
+        for row in range(self.result_table.rowCount()):
+            combobox = QComboBox()
+            combobox.addItems(['Белый', 'Комбинированный', 'Цельный'])
+            self.result_table.setCellWidget(row-1, 6, combobox)
         # Строка с итоговой суммой
         self.result_table.setItem(row, 3, QTableWidgetItem('Итого:'))
-        self.result_table.setItem(row, 4, QTableWidgetItem(f'{total_cost} руб.'))
+        self.result_table.setItem(row, 5, QTableWidgetItem(f'{total_cost} руб.'))
 
         self.result_table.resizeColumnsToContents()
         self.result_table.setWindowTitle('Результат расчета стоимости')
@@ -714,7 +898,6 @@ class WindowSelector(QWidget):
 
         self.stacked_widget.addWidget(self.result_table)
         self.stacked_widget.setCurrentWidget(self.result_table)
-
 
     def loadPrices(self):
         wb = openpyxl.load_workbook('file.xlsx')
@@ -728,8 +911,8 @@ class WindowSelector(QWidget):
 
 
         # Формируем словарь
-        for name, cost in zip(item_names, item_costs):
-            self.costs_dict[name] = cost
+        for name, ed,cost in zip(item_names, item_ed , item_costs):
+            self.costs_dict[name] = [ed,cost]
 
 
         return self.costs_dict
