@@ -211,7 +211,7 @@ class WindowSelector(QWidget):
 
     def calcSingleSize(self, window_type):
         self.window_type = window_type  # Сохранение типа окна
-        if not hasattr(self, 'input_screen_priceSt_One'):
+        if not hasattr(self, 'uuu'):
             self.input_screen_priceSt_One = QWidget()
             self.input_layout_priceSt_One = QVBoxLayout(self.input_screen_priceSt_One)
 
@@ -281,7 +281,7 @@ class WindowSelector(QWidget):
 
     def showThreeSize(self, window_type):
         self.window_type = window_type  # Сохранение типа окна
-        if not hasattr(self, 'input_screen_priceSt_Three'):
+        if not hasattr(self, 'mmm'):
             self.input_screen_priceSt_Three  = QWidget()
             self.input_layout_priceSt_Three  = QVBoxLayout(self.input_screen_priceSt_Three)
 
@@ -442,7 +442,7 @@ class WindowSelector(QWidget):
 
 
     def calcThreeWindow(self):
-        if not hasattr(self, 'input_screen_stekla_Three'):
+        if not hasattr(self, 'ccc'):
             self.input_screen_stekla_Three = QWidget()
             self.input_layout_stekla_Three= QVBoxLayout(self.input_screen_stekla_Three)
 
@@ -474,7 +474,7 @@ class WindowSelector(QWidget):
         self.back_button.show()
 
     def calcDoubleWindow(self):
-        if not hasattr(self, 'input_screen_stekla_Double'):
+        if not hasattr(self, 'eee'):
             self.input_screen_stekla_Double = QWidget()
             self.input_layout_stekla_Double = QVBoxLayout(self.input_screen_stekla_Double)
 
@@ -506,7 +506,7 @@ class WindowSelector(QWidget):
         self.back_button.show()
 
     def calcOneWindow(self):
-        if not hasattr(self, 'input_screen_stekla_One'):
+        if not hasattr(self, 'www'):
             self.input_screen_stekla_One = QWidget()
             self.input_layout_stekla_One = QVBoxLayout(self.input_screen_stekla_One)
 
@@ -529,6 +529,7 @@ class WindowSelector(QWidget):
             self.input_layout_stekla_One.addWidget(self.calculate_button_One)
 
             self.stacked_widget.addWidget(self.input_screen_stekla_One)
+            self.stacked_widget.setCurrentWidget(self.input_screen_stekla_One)
 
         self.stacked_widget.setCurrentWidget(self.input_screen_stekla_One)
         self.back_button.show()
@@ -558,9 +559,7 @@ class WindowSelector(QWidget):
             if hasattr(self, 'width_lineedit_priceDoor_One'):
                 self.height_lineedit_priceDoor_One.clear()
                 self.width_lineedit_priceDoor_One.clear()
-            if hasattr(self, 'height_label_One'):
-                self.height_label_One.clear()
-                self.width_label_One.clear()
+
             if hasattr(self, 'height_label_Double'):
                 self.height_label_Double.clear()
                 self.width_label_Double.clear()
@@ -569,7 +568,7 @@ class WindowSelector(QWidget):
                 self.height_label_Three.clear()
                 self.width_label_Three.clear()
                 self.btn_Three.clear()
-            if hasattr(self, 'input_screen_priceSt_One'):
+            if hasattr(self, 'height_label_window_priceSt_One'):
                 self.height_label_window_priceSt_One.clear()
                 self.width_label_window_priceSt_One.clear()
 
