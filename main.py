@@ -239,7 +239,7 @@ class WindowSelector(QWidget):
         try:
             height = float(self.height_lineedit_window_priceSt_One.text())
             width = float(self.width_lineedit_window_priceSt_One.text())
-            X1 = width - 10 - 124
+            X1 = width - 224
             Y1 = height - 228
             result_text = f"Одностворчатое окно\n{X1} x {Y1} * {1} пакета"
             self.showResult(result_text)
