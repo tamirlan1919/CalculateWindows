@@ -116,11 +116,11 @@ class WindowSelector(QWidget):
 
             self.calculate_button_priceDoor = QPushButton('Рассчитать')
             self.calculate_button_priceDoor.clicked.connect(self.CalculateDoubleDoor)
-
-            self.input_layout_priceDoor.addWidget(self.height_label_priceDoor)
-            self.input_layout_priceDoor.addWidget(self.height_lineedit_priceDoor)
             self.input_layout_priceDoor.addWidget(self.width_label_priceDoor)
             self.input_layout_priceDoor.addWidget(self.width_lineedit_priceDoor)
+            self.input_layout_priceDoor.addWidget(self.height_label_priceDoor)
+            self.input_layout_priceDoor.addWidget(self.height_lineedit_priceDoor)
+
             self.input_layout_priceDoor.addWidget(self.left_label_priceDoor)
             self.input_layout_priceDoor.addWidget(self.left_lineedit_priceDoor)
             self.input_layout_priceDoor.addWidget(self.right_label_priceDoor)
@@ -162,11 +162,11 @@ class WindowSelector(QWidget):
 
             self.calculate_button_priceDoor_One = QPushButton('Рассчитать')
             self.calculate_button_priceDoor_One.clicked.connect(self.calculateSinleDoor)
-
-            self.input_layout_priceDoor_One.addWidget(self.height_label_priceDoor_One)
-            self.input_layout_priceDoor_One.addWidget(self.height_lineedit_priceDoor_One)
             self.input_layout_priceDoor_One.addWidget(self.width_label_priceDoor_One)
             self.input_layout_priceDoor_One.addWidget(self.width_lineedit_priceDoor_One)
+            self.input_layout_priceDoor_One.addWidget(self.height_label_priceDoor_One)
+            self.input_layout_priceDoor_One.addWidget(self.height_lineedit_priceDoor_One)
+
             self.input_layout_priceDoor_One.addWidget(self.calculate_button_priceDoor_One)
 
             self.stacked_widget.addWidget(self.input_screen_priceDoor_One)
@@ -223,11 +223,11 @@ class WindowSelector(QWidget):
 
             self.calculate_button_window_priceSt_One = QPushButton('Рассчитать')
             self.calculate_button_window_priceSt_One.clicked.connect(self.calculateWindowSingle)
-
-            self.input_layout_priceSt_One.addWidget(self.height_label_window_priceSt_One)
-            self.input_layout_priceSt_One.addWidget(self.height_lineedit_window_priceSt_One)
             self.input_layout_priceSt_One.addWidget(self.width_label_window_priceSt_One)
             self.input_layout_priceSt_One.addWidget(self.width_lineedit_window_priceSt_One)
+            self.input_layout_priceSt_One.addWidget(self.height_label_window_priceSt_One)
+            self.input_layout_priceSt_One.addWidget(self.height_lineedit_window_priceSt_One)
+
             self.input_layout_priceSt_One.addWidget(self.calculate_button_window_priceSt_One)
 
             self.stacked_widget.addWidget(self.input_screen_priceSt_One)
@@ -263,11 +263,11 @@ class WindowSelector(QWidget):
 
             self.calculate_button_window_priceSt = QPushButton('Рассчитать')
             self.calculate_button_window_priceSt.clicked.connect(self.calculateWindow)
-
-            self.input_layout_priceSt.addWidget(self.height_label_window_priceSt)
-            self.input_layout_priceSt.addWidget(self.height_lineedit_window_priceSt)
             self.input_layout_priceSt.addWidget(self.width_label_window_priceSt)
             self.input_layout_priceSt.addWidget(self.width_lineedit_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.height_label_window_priceSt)
+            self.input_layout_priceSt.addWidget(self.height_lineedit_window_priceSt)
+
             self.input_layout_priceSt.addWidget(self.spacer_size_label_window_priceSt)
             self.input_layout_priceSt.addWidget(self.spacer_size_lineedit_window_priceSt)
             self.input_layout_priceSt.addWidget(self.calculate_button_window_priceSt)
@@ -297,10 +297,11 @@ class WindowSelector(QWidget):
             self.calculate_button_window_priceSt_Three = QPushButton('Рассчитать')
             self.calculate_button_window_priceSt_Three.clicked.connect(self.calculateThreeWindow)
 
-            self.input_layout_priceSt_Three.addWidget(self.height_label_window_priceSt_Three)
-            self.input_layout_priceSt_Three.addWidget(self.height_lineedit_window_priceSt_Three)
             self.input_layout_priceSt_Three.addWidget(self.width_label_window_priceSt_Three)
             self.input_layout_priceSt_Three.addWidget(self.width_lineedit_window_priceSt_Three)
+            self.input_layout_priceSt_Three.addWidget(self.height_label_window_priceSt_Three)
+            self.input_layout_priceSt_Three.addWidget(self.height_lineedit_window_priceSt_Three)
+
             self.input_layout_priceSt_Three.addWidget(self.spacer_size_label_window_priceSt_Three)
             self.input_layout_priceSt_Three.addWidget(self.spacer_size_lineedit_window_priceSt_Three)
             self.input_layout_priceSt_Three.addWidget(self.calculate_button_window_priceSt_Three)
@@ -424,11 +425,11 @@ class WindowSelector(QWidget):
 
             self.calculate_button = QPushButton('Рассчитать')
             self.calculate_button.clicked.connect(self.calculateCost)
-
-            self.input_layout_stekla.addWidget(self.height_label)
-            self.input_layout_stekla.addWidget(self.height_lineedit)
             self.input_layout_stekla.addWidget(self.width_label)
             self.input_layout_stekla.addWidget(self.width_lineedit)
+            self.input_layout_stekla.addWidget(self.height_label)
+            self.input_layout_stekla.addWidget(self.height_lineedit)
+
             self.input_layout_stekla.addWidget(self.btn)
             self.input_layout_stekla.addWidget(self.btn_edit)
 
@@ -458,10 +459,11 @@ class WindowSelector(QWidget):
             self.calculate_button_Three = QPushButton('Рассчитать')
             self.calculate_button_Three.clicked.connect(self.calculateCostThree)
 
-            self.input_layout_stekla_Three.addWidget(self.height_label_Three)
-            self.input_layout_stekla_Three.addWidget(self.height_lineedit_Three)
             self.input_layout_stekla_Three.addWidget(self.width_label_Three)
             self.input_layout_stekla_Three.addWidget(self.width_lineedit_Three)
+            self.input_layout_stekla_Three.addWidget(self.height_label_Three)
+            self.input_layout_stekla_Three.addWidget(self.height_lineedit_Three)
+
             self.input_layout_stekla_Three.addWidget(self.btn_Three)
             self.input_layout_stekla_Three.addWidget(self.btn_edit_Three)
             self.input_layout_stekla_Three.addWidget(self.calculate_button_Three)
@@ -490,10 +492,11 @@ class WindowSelector(QWidget):
             self.calculate_button_Double = QPushButton('Рассчитать')
             self.calculate_button_Double.clicked.connect(self.calculateCostDouble)
 
-            self.input_layout_stekla_Double.addWidget(self.height_label_Double)
-            self.input_layout_stekla_Double.addWidget(self.height_lineedit_Double)
             self.input_layout_stekla_Double.addWidget(self.width_label_Double)
             self.input_layout_stekla_Double.addWidget(self.width_lineedit_Double)
+            self.input_layout_stekla_Double.addWidget(self.height_label_Double)
+            self.input_layout_stekla_Double.addWidget(self.height_lineedit_Double)
+
             self.input_layout_stekla_Double.addWidget(self.btn_Double)
             self.input_layout_stekla_Double.addWidget(self.btn_edit_Double)
             self.input_layout_stekla_Double.addWidget(self.calculate_button_Double)
@@ -520,10 +523,11 @@ class WindowSelector(QWidget):
             self.calculate_button_One = QPushButton('Рассчитать')
             self.calculate_button_One.clicked.connect(self.calculateCost_One)
 
-            self.input_layout_stekla_One.addWidget(self.height_label_One)
-            self.input_layout_stekla_One.addWidget(self.height_lineedit_One)
             self.input_layout_stekla_One.addWidget(self.width_label_One)
             self.input_layout_stekla_One.addWidget(self.width_lineedit_One)
+            self.input_layout_stekla_One.addWidget(self.height_label_One)
+            self.input_layout_stekla_One.addWidget(self.height_lineedit_One)
+
 
 
             self.input_layout_stekla_One.addWidget(self.calculate_button_One)
@@ -693,7 +697,7 @@ class WindowSelector(QWidget):
         total_cost = 0
 
         for item_name, item_cost in costs_dict.items():
-            total_cost_item = float(item_cost[-1] ) # Цена товара из Excel
+            total_cost_item = float(item_cost.get('Белый') ) # Цена товара из Excel
             count = 1 if item_name in ['Замок', 'Петля', 'Ручка', 'Монтаж', 'Прочее','Производство'] else 2 * (height + width)
             count_formula = None
             if item_name == "Рама":
@@ -722,21 +726,24 @@ class WindowSelector(QWidget):
             self.result_table.setItem(row, 0, QTableWidgetItem(str(row + 1)))  # Номер строки
             self.result_table.setItem(row, 1, QTableWidgetItem(item_name))  # Название товара
             self.result_table.setItem(row, 2, QTableWidgetItem(str(round(count,3))))  # Кол-во
-            self.result_table.setItem(row, 3, QTableWidgetItem(str(item_cost[0])))  # Единица измерения
+            self.result_table.setItem(row, 3, QTableWidgetItem(str(item_cost['Единица'])))  # Единица измерения
             self.result_table.setItem(row, 4, QTableWidgetItem(f'{total_cost_item} руб.'))  # Цена
-            self.result_table.setItem(row, 5, QTableWidgetItem(f'{subtotal} руб.'))  # Сумма
+            self.result_table.setItem(row, 5, QTableWidgetItem(f'{ subtotal} руб.'))  # Сумма
+
+
+            # Добавляем QComboBox с возможностью выбора цвета
+            combobox = QComboBox()
+            combobox.addItems(['Белый', 'Комбинированный', 'Цельный'])
+            combobox.currentIndexChanged.connect(
+                lambda index, row=row, item_cost=item_cost: self.updatePrice(index, row, item_cost))
+            self.result_table.setCellWidget(row, 6, combobox)
 
             row += 1
 
 
-        for row in range(self.result_table.rowCount()):
-            combobox = QComboBox()
-            combobox.addItems(['Белый', 'Комбинированный', 'Цельный'])
-            self.result_table.setCellWidget(row-1, 6, combobox)
-
         # Строка с итоговой суммой
         self.result_table.setItem(row, 3, QTableWidgetItem('Итого:'))
-        self.result_table.setItem(row, 5, QTableWidgetItem(f'{total_cost} руб.'))
+        self.result_table.setItem(row, 5, QTableWidgetItem(f'{round(total_cost,2)} руб.'))
 
         self.result_table.resizeColumnsToContents()
         self.result_table.setWindowTitle('Результат расчета стоимости')
@@ -772,7 +779,7 @@ class WindowSelector(QWidget):
         total_cost = 0
 
         for item_name, item_cost in costs_dict.items():
-            total_cost_item = float(item_cost[-1] ) # Цена товара из Excel
+            total_cost_item = float(item_cost.get('Белый') ) # Цена товара из Excel
             count = 1 if item_name in ['Замок', 'Петля', 'Ручка', 'Монтаж', 'Прочее','Производство'] else 2 * (height + width)
             count_formula = None
             if item_name == "Рама":
@@ -800,15 +807,20 @@ class WindowSelector(QWidget):
             self.result_table.setItem(row, 0, QTableWidgetItem(str(row + 1)))  # Номер строки
             self.result_table.setItem(row, 1, QTableWidgetItem(item_name))  # Название товара
             self.result_table.setItem(row, 2, QTableWidgetItem(str(round(count,3))))  # Кол-во
-            self.result_table.setItem(row, 3, QTableWidgetItem(str(item_cost[0])))  # Единица измерения
+            self.result_table.setItem(row, 3, QTableWidgetItem(str(item_cost['Единица'])))  # Единица измерения
             self.result_table.setItem(row, 4, QTableWidgetItem(f'{total_cost_item} руб.'))  # Цена
             self.result_table.setItem(row, 5, QTableWidgetItem(f'{subtotal} руб.'))  # Сумма
 
-            row += 1
-        for row in range(self.result_table.rowCount()):
+
+            # Добавляем QComboBox с возможностью выбора цвета
             combobox = QComboBox()
             combobox.addItems(['Белый', 'Комбинированный', 'Цельный'])
-            self.result_table.setCellWidget(row-1, 6, combobox)
+            combobox.currentIndexChanged.connect(
+                lambda index, row=row, item_cost=item_cost: self.updatePrice(index, row, item_cost))
+            self.result_table.setCellWidget(row, 6, combobox)
+
+            row += 1
+
         # Строка с итоговой суммой
         self.result_table.setItem(row, 3, QTableWidgetItem('Итого:'))
         self.result_table.setItem(row, 5, QTableWidgetItem(f'{total_cost} руб.'))
@@ -820,7 +832,7 @@ class WindowSelector(QWidget):
         self.stacked_widget.addWidget(self.result_table)
         self.stacked_widget.setCurrentWidget(self.result_table)
 
-    def showCostTable_One(self, costs_dict):
+    def showCostTable_One(self, costs_dict, row=None):
         if hasattr(self, 'result_table'):
             self.result_table.deleteLater()
 
@@ -828,7 +840,7 @@ class WindowSelector(QWidget):
         self.result_table.setRowCount(len(costs_dict) + 1)  # +1 для строки с итоговой суммой
         self.result_table.setColumnCount(7)  # Добавлен один столбец для суммы
 
-        headers = ['N', 'Наименование', 'Кол-во', 'Единица', 'Цена', 'Сумма']
+        headers = ['N', 'Наименование', 'Кол-во', 'Единица', 'Цена', 'Сумма', 'Цвет']
         self.result_table.setHorizontalHeaderLabels(headers)
 
         height = float(self.height_lineedit_One.text()) / 1000
@@ -845,16 +857,14 @@ class WindowSelector(QWidget):
         total_cost = 0
 
         for item_name, item_cost in costs_dict.items():
-            total_cost_item = float(item_cost[-1])  # Цена товара из Excel
-            count = 1 if item_name in ['Замок', 'Петля', 'Ручка', 'Монтаж', 'Прочее','Производство'] else 2 * (height + width)
-            count_formula = None
+            total_cost_item = float(item_cost.get('Белый'))  # Цена товара из Excel
 
+            count = 1 if item_name in ['Замок', 'Петля', 'Ручка', 'Монтаж', 'Прочее', 'Производство'] else 2 * (
+                        height + width)
+            count_formula = None
 
             if item_name == "Рама":
                 count_formula = rama
-
-            elif item_name == "Импост":
-                continue
             elif item_name == "Створка":
                 count_formula = stvor
             elif item_name == "Штапик":
@@ -867,26 +877,29 @@ class WindowSelector(QWidget):
                 count_formula = (width * height)
             elif item_name == "Стекло":
                 count_formula = steklo
+
             if count_formula is not None:
                 count = count_formula
-            print(type(count), type(total_cost))
-            subtotal = round(total_cost_item * count, 2)  # Сумма товара, округленная до двух знаков
 
+            subtotal = round(total_cost_item * count, 2)  # Сумма товара, округленная до двух знаков
             total_cost += subtotal
 
             self.result_table.setItem(row, 0, QTableWidgetItem(str(row + 1)))  # Номер строки
             self.result_table.setItem(row, 1, QTableWidgetItem(item_name))  # Название товара
             self.result_table.setItem(row, 2, QTableWidgetItem(str(round(count, 3))))  # Кол-во
-            self.result_table.setItem(row, 3, QTableWidgetItem(str(item_cost[0])))  # Единица измерения
+            self.result_table.setItem(row, 3, QTableWidgetItem(str(item_cost['Единица'])))  # Единица измерения
             self.result_table.setItem(row, 4, QTableWidgetItem(f'{total_cost_item} руб.'))  # Цена
             self.result_table.setItem(row, 5, QTableWidgetItem(f'{subtotal} руб.'))  # Сумма
 
-            row += 1
-
-        for row in range(self.result_table.rowCount()):
+            # Добавляем QComboBox с возможностью выбора цвета
             combobox = QComboBox()
             combobox.addItems(['Белый', 'Комбинированный', 'Цельный'])
-            self.result_table.setCellWidget(row-1, 6, combobox)
+            combobox.currentIndexChanged.connect(
+                lambda index, row=row, item_cost=item_cost: self.updatePrice(index, row, item_cost))
+            self.result_table.setCellWidget(row, 6, combobox)
+
+            row += 1
+
         # Строка с итоговой суммой
         self.result_table.setItem(row, 3, QTableWidgetItem('Итого:'))
         self.result_table.setItem(row, 5, QTableWidgetItem(f'{total_cost} руб.'))
@@ -898,24 +911,43 @@ class WindowSelector(QWidget):
         self.stacked_widget.addWidget(self.result_table)
         self.stacked_widget.setCurrentWidget(self.result_table)
 
+    # Функция для обновления цены и итоговой суммы при изменении цвета в QComboBox
+    def updatePrice(self, index, row, item_cost):
+        color = item_cost[['Белый', 'Комбинированный', 'Цельный'][index]]
+        price_item = float(color)
+        count_item = float(self.result_table.item(row, 2).text())
+        subtotal = round(price_item * count_item, 2)
+
+        self.result_table.item(row, 4).setText(f'{price_item} руб.')
+        self.result_table.item(row, 5).setText(f'{subtotal} руб.')
+
+        # Пересчитываем итоговую сумму
+        total_cost = sum(
+            float(self.result_table.item(i, 5).text().split()[0]) for i in range(self.result_table.rowCount() - 1))
+        self.result_table.item(self.result_table.rowCount() - 1, 5).setText(f'{total_cost:.2f} руб.')
+
     def loadPrices(self):
         wb = openpyxl.load_workbook('file.xlsx')
         sheet = wb.active
         self.costs_dict = {}
 
         # Получаем значения по столбцам
-        item_names = [cell.value for cell in sheet[1] if cell.value is not None]  # Названия товаров
-        item_ed = [cell.value for cell in sheet[2] if cell.value is not None]  # Еденица товара
-        item_costs = [cell.value for cell in sheet[3] if cell.value is not None]  # Стоимости товаров
-
+        item_names = [cell.value for cell in sheet['A'][1:] if cell.value is not None]  # Названия товаров
+        item_ed = [cell.value for cell in sheet['B'][1:] if cell.value is not None]  # Единица товара
+        item_white_costs = [cell.value for cell in sheet['C'][1:] if
+                            cell.value is not None]  # Цены товаров на белый цвет
+        item_combined_costs = [cell.value for cell in sheet['D'][1:] if
+                               cell.value is not None]  # Цены товаров на комбинированный цвет
+        item_solid_costs = [cell.value for cell in sheet['E'][1:] if
+                            cell.value is not None]  # Цены товаров на цельный цвет
 
         # Формируем словарь
-        for name, ed,cost in zip(item_names, item_ed , item_costs):
-            self.costs_dict[name] = [ed,cost]
-
-
+        for name, ed, white_cost, combined_cost, solid_cost in zip(item_names, item_ed, item_white_costs,
+                                                                   item_combined_costs, item_solid_costs):
+            self.costs_dict[name] = {'Единица': ed, 'Белый': white_cost, 'Комбинированный': combined_cost,
+                                     'Цельный': solid_cost}
+        print(self.costs_dict)
         return self.costs_dict
-
 
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Message', 'Are you sure to quit?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
