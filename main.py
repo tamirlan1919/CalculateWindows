@@ -340,7 +340,7 @@ class WindowSelector(QWidget):
             Y2 = height - 228
 
             # Показываем результат
-            result_text = f"Двухстворчатое оконо\n{X1} x {Y1} * {first_pack} пакета\n{X2} x {Y2} * {second_pack} пакета"
+            result_text = f"Двухстворчатое окно\n{X1} x {Y1} * {first_pack} пакета\n{X2} x {Y2} * {second_pack} пакета"
             self.showResult(result_text)
         except ValueError:
             print("Ошибка: некорректный формат ввода данных.")
@@ -850,7 +850,7 @@ class WindowSelector(QWidget):
         stvor = ((height - 0.1) + (width - 0.1)) * 2
         shtapik = rama
         metall = (rama  + stvor)
-        rezina = rama * 2 + stvor * 2
+        rezina =  rama + stvor * 2
         steklo = (height * width) * 0.75
 
         row = 0
@@ -865,6 +865,8 @@ class WindowSelector(QWidget):
 
             if item_name == "Рама":
                 count_formula = rama
+            elif item_name == "Импост":
+                count_formula = 0
             elif item_name == "Створка":
                 count_formula = stvor
             elif item_name == "Штапик":
@@ -902,7 +904,7 @@ class WindowSelector(QWidget):
 
         # Строка с итоговой суммой
         self.result_table.setItem(row, 3, QTableWidgetItem('Итого:'))
-        self.result_table.setItem(row, 5, QTableWidgetItem(f'{total_cost} руб.'))
+        self.result_table.setItem(row, 5, QTableWidgetItem(f'{round(total_cost,2)} руб.'))
 
         self.result_table.resizeColumnsToContents()
         self.result_table.setWindowTitle('Результат расчета стоимости')
@@ -910,6 +912,8 @@ class WindowSelector(QWidget):
 
         self.stacked_widget.addWidget(self.result_table)
         self.stacked_widget.setCurrentWidget(self.result_table)
+
+
 
     # Функция для обновления цены и итоговой суммы при изменении цвета в QComboBox
     def updatePrice(self, index, row, item_cost):
